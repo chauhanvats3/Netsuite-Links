@@ -33,6 +33,7 @@ form {
     border-radius: 25px;
     border: 4px solid white;
     padding: 5px;
+    
 }
 
 input {
@@ -40,7 +41,6 @@ input {
     top: 0;
     left: 0;
     width: 100%;
-    ;
     height: 42.5px;
     line-height: 30px;
     outline: 0;
@@ -70,6 +70,17 @@ form:hover {
     width: 200px;
     cursor: pointer;
 }
+
+.formHasContent{
+    width: 200px;
+    cursor: pointer;
+}
+
+.inputHasContent{
+    display: block;
+}
+
+
 
 form:hover input {
     display: block;
