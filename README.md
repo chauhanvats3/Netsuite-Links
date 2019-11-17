@@ -3,8 +3,8 @@ $ Then you must have faced the problem faced by bookmarks --> Due to frequent ch
 $ Use this Extension to do away with that annoying login page.
 $ And a few more added features.
 
------------------------------UPDATE 1.5----------------------------
-Added a feature to load client-side modules on the current page.
+-----------------------------UPDATE 1.5----------------------------\n
+$ Added a feature to load client-side modules on the current page.
 
 ---------------------------EXPLANATION-----------------------------------------
 # Initially, you get a link to login to NetSuite, Schema Browser and a search bar for Suite Answers.
