@@ -3,10 +3,10 @@
 # Use this Extension to do away with that annoying login page.
 # And a few more added features.
 
-# -----------------------UPDATE 1.5-------------------------------
+# -----------------------UPDATE 1.5-----------------------------
 # Added a feature to load client-side modules on the current page.
 
-# ----------------------EXPLANATION-------------------------------
+# ----------------------EXPLANATION----------------------------
 # Initially, you get a link to login to NetSuite, Schema Browser and a search bar for Suite Answers.
 
 # Once you Log In to NetSuite, Script Types Page and SS 2.0 Page links are available as well
