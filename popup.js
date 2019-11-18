@@ -7,9 +7,10 @@ document.addEventListener('DOMContentLoaded', function () {
     var btnLoadModule = document.getElementById("btnLoadModule");
     var btnGithub = document.getElementById("btnGithub");
     var inputSearch = document.getElementById("inputSearch");
+    var divLoadModules = document.getElementById("loadModules");
     //funtion to submit SuiteAnswers Query
     function functSubmit(event) {
-        var searchQuery = document.getElementById("input_search").value;
+        var searchQuery = inputSearch.value;
         var ansLink = "";
         if (searchQuery.trim() != "")
             ansLink = "https://netsuite.custhelp.com/app/answers/list/st/5/kw/" + searchQuery;
@@ -39,7 +40,28 @@ document.addEventListener('DOMContentLoaded', function () {
                     btn.style.display = "none"; //hide buttons with half url
                 })();
             }
+            // hide load modules search bar
+            divLoadModules.style.display = "none";
             //   console.log("Tabs not Open");
+        } else {
+            chrome.tabs.query({
+                currentWindow: true,
+                active: true
+            }, function (tabs) {
+                // console.log(tabs[0]);
+                var tab = tabs[0];
+                var tabTitle = tab.title;
+                var tabUrl = tab.url;
+                if (tabUrl.includes("app.netsuite.com")) {
+                    if (tabTitle.includes("NetSuite (Custom User Interface Development)")) {
+                        divLoadModules.style.display = "block";
+                    } else {
+                        divLoadModules.style.display = "none";
+                    }
+                } else {
+                    divLoadModules.style.display = "none";
+                }
+            });
         }
         var buttons = document.getElementsByTagName("button");
         for (var i = 0; i < buttons.length; i++) {
@@ -78,20 +100,20 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     function loadModule() {
-        inputModuleName.value.trim();
-        if (inputModuleName != "" || inputModuleName != void 0) {
-            if (inputModuleName.startsWith("N/") || inputModuleName.startsWith("SuiteScripts/")) {
-                console.log("Module Name : " + inputModuleName);
+        var moduleName = inputModuleName.value.trim();
+        if (moduleName != "" || moduleName != void 0) {
+            if (moduleName.startsWith("N/") || moduleName.startsWith("SuiteScripts/")) {
+                console.log("Module Name : " + moduleName);
                 var tempModuleName = "";
-                if (inputModuleName.endsWith(".js")) {
-                    tempModuleName = inputModuleName.substring(0, inputModuleName.length - 3);
+                if (moduleName.endsWith(".js")) {
+                    tempModuleName = moduleName.substring(0, moduleName.length - 3);
                 } else {
-                    tempModuleName = inputModuleName;
+                    tempModuleName = moduleName;
                 }
 
                 var splittedModuleNameArr = tempModuleName.split("/");
                 var moduleVariableName = splittedModuleNameArr[splittedModuleNameArr.length - 1];
-                dataToSend = "" + moduleVariableName + "," + inputModuleName;
+                dataToSend = "" + moduleVariableName + "," + moduleName;
 
                 var port = chrome.extension.connect({ //Create  a port to connect with background.js
                     name: "Module Communication"
@@ -103,10 +125,10 @@ document.addEventListener('DOMContentLoaded', function () {
                     console.log("message recieved from bg" + msg.joke);
                 });
             } else {
-                alert("Supported modules are 'N/*' or 'SuiteScripts/*' only");
+                confirm("Supported modules are 'N/*' or 'SuiteScripts/*' only");
             }
         } else {
-            alert("Module Name Invalid");
+            confirm("Module Name Invalid");
         }
     }
 

@@ -7,10 +7,10 @@ chrome.extension.onConnect.addListener(function (port) { //Listen to any incomin
         //Define a string to tell chrome api to inject a piece of code
         var codeBGtoPage = "(function() {";
         //Overriding window.onError
-        codeBGtoPage += "var codeToExecute ='window.onerror = function (msg, url, line, col, error) {if (error.TYPE == \"error.SuiteScriptModuleLoaderError\") { alert(error.message);} else { var extra = !col ? \"\" : \"\\\ncolumn: \" + col; extra += !error ? \"\" : \"\\\nerror: \" + error;console.log(\"Error: \" + msg + \"\\\nurl: \" + url + \"\\\n line: \" + line + extra);} var suppressErrorAlert = true;return suppressErrorAlert;};'";
+        codeBGtoPage += "var codeToExecute ='window.onerror = function (msg, url, line, col, error) { alert(error.message); var extra = !col ? \"\" : \"\\\ncolumn: \" + col; extra += !error ? \"\" : \"\\\nerror: \" + error;console.log(\"Error: \" + msg + \"\\\nurl: \" + url + \"\\\n line: \" + line + extra); var suppressErrorAlert = true;return suppressErrorAlert;};'";
         //using require()
         codeBGtoPage += ";codeToExecute+= ';require([\"" + modName + "\"],function(){window[\"" + modVarName + "\"] = require(\"" + modName + "\"); alert(\"Module : " + modName + "\\\n VariableName : " + modVarName + "\\\n Enjoy!\");  });';";
-       //creating a <script> tag to insert script
+        //creating a <script> tag to insert script
         codeBGtoPage += ";var script = document.createElement('script');"; //So ,we had to do all this charade because sending require directly wouldn't work
         codeBGtoPage += "script.textContent = codeToExecute;";
         codeBGtoPage += "document.body.appendChild(script);";
