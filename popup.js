@@ -10,6 +10,23 @@ document.addEventListener('DOMContentLoaded', function () {
     var btnGithub = document.getElementById("btnGithub");
     var inputSearch = document.getElementById("inputSearch");
     var divLoadModules = document.getElementById("loadModules");
+
+  var inputGroups = document.getElementsByClassName("inputGroup");
+  inputGroups = Array.from(inputGroups);
+  console.log(inputGroups);
+  inputGroups.forEach(el => {
+    el.addEventListener("mouseleave", e => {
+      console.log(el + " mouseleaved");
+      setTimeout(() => {
+        el.style.zIndex = "0"
+      }, 400)
+    });
+    el.addEventListener("mouseenter", e => {
+      console.log(el + " mouseEntered");
+      el.style.zIndex = "1"
+    });
+  })
+
     //funtion to submit SuiteAnswers Query
     function functSubmit(event) {
         var searchQuery = inputSearch.value;
