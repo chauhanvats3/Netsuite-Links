@@ -1,4 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
+
+    //TODO : suiteansers search input bart width
     var finalLink = {};
     var formSearch = document.getElementById("searchForm");
     var btnSearch = document.getElementById("btnSearch");
@@ -53,11 +55,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 var tabTitle = tab.title;
                 var tabUrl = tab.url;
                 if (tabUrl.includes("app.netsuite.com")) {
-                    if (tabTitle.includes("NetSuite (Custom User Interface Development)")) {
-                        divLoadModules.style.display = "block";
-                    } else {
-                        divLoadModules.style.display = "none";
-                    }
+                    divLoadModules.style.display = "block";
                 } else {
                     divLoadModules.style.display = "none";
                 }

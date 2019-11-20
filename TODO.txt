@@ -1,0 +1,1 @@
+https://tstdrv1150860.app.netsuite.com/app/center/card.nl //open two instances together

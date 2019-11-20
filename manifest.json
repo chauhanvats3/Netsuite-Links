@@ -1,8 +1,8 @@
 {
     "manifest_version": 2,
     "name": "NetSuite Links",
-    "version": "1.5.2",
-    "description": "Go to popular dev links of NetSuite",
+    "version": "1.5.5",
+    "description": "NetSuite Dev Links",
     "permissions": ["tabs", "https://*.app.netsuite.com/*"],
     "browser_action": {
         "default_popup": "popup.html",
