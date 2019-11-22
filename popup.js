@@ -1,83 +1,116 @@
 document.addEventListener('DOMContentLoaded', function () {
     var finalLink = {};
-    var formSearch = document.getElementById("searchForm");
+    var inputSearch = document.getElementById("inputSearch");
     var btnSearch = document.getElementById("btnSearch");
     var inputModuleName = document.getElementById("moduleNameInput");
-    var formLoadModule = document.getElementById("loadModuleForm");
     var btnLoadModule = document.getElementById("btnLoadModule");
     var btnGithub = document.getElementById("btnGithub");
-    var inputSearch = document.getElementById("inputSearch");
-    var divLoadModules = document.getElementById("loadModules");
+    var inputGroups = document.getElementsByClassName("inputGroup");
+    var defaultAccName = 'tstdrv2152924';
+    var searchInputGroup = document.getElementById("searchForm");
+    var moduleInputGroup = document.getElementById("loadModules");
+    var inputBoxValue = "";
+    var moduleLoadDisabled = false;
 
-  var inputGroups = document.getElementsByClassName("inputGroup");
-  inputGroups = Array.from(inputGroups);
-  console.log(inputGroups);
-  inputGroups.forEach(el => {
-    el.addEventListener("mouseleave", e => {
-      console.log(el + " mouseleaved");
-      setTimeout(() => {
-        el.style.zIndex = "0"
-      }, 400)
-    });
-    el.addEventListener("mouseenter", e => {
-      console.log(el + " mouseEntered");
-      el.style.zIndex = "1"
-    });
-  })
 
+
+    function disableModuleInput() {
+        inputModuleName.disabled = true;
+        inputModuleName.placeholder = "Disabled Here!";
+        btnLoadModule.addEventListener('click', doNothingOnClick);
+        moduleLoadDisabled = true;
+    }
+
+    /**============================Search and load module animation fix=========================== */
+    inputGroups = [searchInputGroup, moduleInputGroup];
+    inputGroups.forEach(eachIG => {
+        eachIG.addEventListener("mouseleave", e => {
+            switch (eachIG.id) {
+                case "searchForm":
+                    if (inputBoxValue)
+                        searchInputGroup.classList.add("searchInputGroupOpened");
+                    else
+                        searchInputGroup.classList.remove("searchInputGroupOpened");
+                    break;
+                case "loadModules":
+                    if (inputBoxValue)
+                        moduleInputGroup.classList.add("moduleInputGroupOpened");
+                    else
+                        moduleInputGroup.classList.remove("moduleInputGroupOpened");
+                    break;
+            }
+
+            if (!inputBoxValue)
+                eachIG.style.zIndex = "0";
+
+        });
+        eachIG.addEventListener("mouseenter", e => {
+            eachIG.style.zIndex = "1";
+        });
+    });
+    /**================================== Animation Fix ENDS =============================================== */
+
+
+    /* ========================== Search Suite Answers Logic Here =========================== */
+    //Assign both enter event and click event
+    inputSearch.addEventListener('keydown', (e) => {
+        if (e.key === "Enter") {
+            functDoSearch(e);
+        }
+    });
+    btnSearch.addEventListener('click', functDoSearch);
     //funtion to submit SuiteAnswers Query
-    function functSubmit(event) {
+    function functDoSearch(event) {
         var searchQuery = inputSearch.value;
-        var ansLink = "";
+        var ansLink = "https://netsuite.custhelp.com/";
+
         if (searchQuery.trim() != "")
             ansLink = "https://netsuite.custhelp.com/app/answers/list/st/5/kw/" + searchQuery;
-        else
-            ansLink = "https://netsuite.custhelp.com/";
+
         chrome.tabs.create({
             active: true,
             url: ansLink
         });
     }
+    /* ================================= Search Answers ENDS ============================================ */
 
-    //Assign both enter event and click event
-    formSearch.addEventListener('submit', functSubmit);
-    btnSearch.addEventListener('click', functSubmit);
 
-    var queryInfo = {
+    var getAllNetsuiteTabsQuery = {
         'url': "https://*.app.netsuite.com/*"
     };
-    var defaultAccName = 'tstdrv2152924';
+    chrome.tabs.query(getAllNetsuiteTabsQuery, function (allNetsuiteTabs) {
+        console.log("Query for all NS tabs fired");
+        if (allNetsuiteTabs.length == 0) { //if no netsuite tab is open
+            console.log("no netsuite tab open");
+            disableModuleInput();
 
-    chrome.tabs.query(queryInfo, function (tabs) {
-        if (tabs == '' || tabs == void 0) { //if no netsuite tab is open
-            var halfButtons = document.getElementsByClassName("btn btn-primary hasHalfValue");
-            for (var j = 0; j < halfButtons.length; j++) {
-                (function () {
-                    var btn = halfButtons[j];
-                    btn.style.display = "none"; //hide buttons with half url
-                })();
-            }
-            // hide load modules search bar
-            divLoadModules.style.display = "none";
-            //   console.log("Tabs not Open");
-        } else {
-            chrome.tabs.query({
+        } else { //netsuite tab is open
+
+            console.log("Netsuite tab open");
+            var getCurrentTabQuery = {
                 currentWindow: true,
                 active: true
-            }, function (tabs) {
-                // console.log(tabs[0]);
-                var tab = tabs[0];
-                var tabTitle = tab.title;
-                var tabUrl = tab.url;
-                if (tabUrl.includes("app.netsuite.com")) {
-                    if (tabTitle.includes("NetSuite (Custom User Interface Development)")) {
-                        divLoadModules.style.display = "block";
+            };
+            chrome.tabs.query(getCurrentTabQuery, function (currentWindowTabs) {
+                console.log("Active tab query fired");
+                if (currentWindowTabs.length != 0) { //current window is present
+                    console.log("Current tabis present");
+                    // console.log(tabs[0]);
+                    var currTab = currentWindowTabs[0];
+                    var tabUrl = currTab.url;
+                    if (tabUrl.includes("app.netsuite.com")) {
+                        console.log("tab includes ns url");
+                        inputModuleName.style.display = "block";
+                        inputModuleName.placeholder = "Load Modules";
                     } else {
-                        divLoadModules.style.display = "none";
+                        console.log("tab doesnt include ns url");
+                        disableModuleInput();
                     }
                 } else {
-                    divLoadModules.style.display = "none";
+                    console.log("No current window present");
+                    disableModuleInput();
                 }
+
             });
         }
         var buttons = document.getElementsByTagName("button");
@@ -86,23 +119,40 @@ document.addEventListener('DOMContentLoaded', function () {
             (function () {
                 var btn = buttons[i];
                 if (btn.id != 'btnGithub') {
-                    if (btn.style.display != "none") { //for the buttons that are visible
-                        var classNameBtn = btn.className;
-                        var isClassHalfValue = classNameBtn.includes("hasHalfValue");
-                        var btnId = btn.id;
-                        // console.log("Class = " + classNameBtn);
-                        if (isClassHalfValue) { //for those who have half link, get the account id
-                            var url = tabs[0].url;
+                    var classNameBtn = btn.className;
+                    var isClassHalfValue = classNameBtn.includes("hasHalfValue");
+                    var btnId = btn.id;
+                    // console.log("Class = " + classNameBtn);
+                    if (isClassHalfValue) {
+                        var scheme, accName, location;
+                        scheme = "https://";
+                        location = btn.value;
+                        if (allNetsuiteTabs.length != 0) { //If any netsuite tab is open
+                            //for those who have half link, get the account id
+                            var url = allNetsuiteTabs[0].url;
                             var urlWithoutScheme = url.slice(8);
                             var splittedUrlArr = urlWithoutScheme.split(".", 1);
-                            var extractedAccName = splittedUrlArr[0];
-                            var scheme = "https://";
-                            var accName = extractedAccName ? extractedAccName : defaultAccName;
-                            var location = btn.value;
+                            var extractedAccName = splittedUrlArr[0].trim();
+                            accName = extractedAccName ? extractedAccName : defaultAccName;
                             finalLink[btnId] = "" + scheme + accName + location;
-                        } else { //for those with full link
-                            finalLink[btnId] = btn.value;
+                        } else {
+                            //if no netsuite tab is open
+                            finalLink[btnId] = "" + scheme + defaultAccName + location;
                         }
+
+                    } else { //for those with full link
+                        finalLink[btnId] = btn.value;
+                    }
+
+                    if (btn.id == "btnLogIn") {
+                        btn.onclick = function () { //assign on click to each button accordingly
+                            var urlLink = finalLink[this.id];
+                            chrome.tabs.update({
+                                active: true,
+                                url: urlLink
+                            });
+                        };
+                    } else {
                         btn.onclick = function () { //assign on click to each button accordingly
                             var urlLink = finalLink[this.id];
                             chrome.tabs.create({
@@ -111,14 +161,32 @@ document.addEventListener('DOMContentLoaded', function () {
                             });
                         };
                     }
+
                 }
             })();
         }
     });
 
+    function doNothingOnClick() {
+        console.log("Do Nothing");
+    }
+
+
+
+    /*============================== LOAD MODULES Function ================================ */
+    inputModuleName.addEventListener('keydown', (e) => {
+        if (e.key === "Enter") {
+            loadModule();
+        }
+    });
+    if (!moduleLoadDisabled) {
+        btnLoadModule.addEventListener('click', loadModule);
+    }
+
     function loadModule() {
+        console.log("Module load disable = ");
         var moduleName = inputModuleName.value.trim();
-        if (moduleName != "" || moduleName != void 0) {
+        if (moduleName != "" || moduleName != void 0 || moduleName != null) {
             if (moduleName.startsWith("N/") || moduleName.startsWith("SuiteScripts/")) {
                 console.log("Module Name : " + moduleName);
                 var tempModuleName = "";
@@ -142,15 +210,17 @@ document.addEventListener('DOMContentLoaded', function () {
                     console.log("message recieved from bg" + msg.joke);
                 });
             } else {
-                confirm("Supported modules are 'N/*' or 'SuiteScripts/*' only");
+                var conReply = confirm("Supported modules are 'N/*' or 'SuiteScripts/*' only");
+                inputModuleName.focus();
             }
         } else {
             confirm("Module Name Invalid");
         }
-    }
 
-    formLoadModule.addEventListener('submit', loadModule);
-    btnLoadModule.addEventListener('click', loadModule);
+    }
+    /*============================= Load Module ENDS ==================================== */
+
+    /*======================== Go To GitHub========================== */
     btnGithub.addEventListener('click', goToGithub);
 
     function goToGithub() {
@@ -160,38 +230,32 @@ document.addEventListener('DOMContentLoaded', function () {
             url: urlGithub
         });
     }
+    /* ================================ ENDS ==================================*/
 
+
+    /*==============================Input Listener===================================== */
     inputSearch.addEventListener('input', inputChanged);
     inputModuleName.addEventListener('input', inputChanged);
 
+
     function inputChanged(e) {
         var caller = e.target || e.srcElement;
-
-        if (caller.value) {
+        inputBoxValue = caller.value;
+        if (inputBoxValue) {
             console.log("Caller Has Value");
-            caller.className = "inputHasContent";
-
-            switch (caller.id) {
-
-                case 'inputSearch':
-                    formSearch.className = "formHasContent";
-                    break;
-                case 'moduleNameInput':
-                    formLoadModule.className = "formHasContent";
-                    break;
-            }
         } else {
-            caller.className = caller.className.replace(/\binputHasContent\b/g, "");
-            console.log("Caller Doesn't have Value");
             switch (caller.id) {
-                case 'inputSearch':
-                    formSearch.className = formSearch.className.replace(/\bformHasContent\b/g, "");
+                case "inputSearch":
+                    searchInputGroup.classList.remove("searchInputGroupOpened");
                     break;
-                case 'moduleNameInput':
-                    formLoadModule.className = formLoadModule.className.replace(/\bformHasContent\b/g, "");
+                case "moduleNameInput":
+                    moduleInputGroup.classList.remove("moduleInputGroupOpened");
                     break;
             }
+
         }
     }
+
+    /*======================================Input Listener Ends============================ */
 
 });

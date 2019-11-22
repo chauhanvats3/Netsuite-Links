@@ -1,7 +1,7 @@
 :root {
   --bg: #232931;
   --accent-dim: #62ACE5;
-  --text: #eee;
+  --text: #f1f1f1;
 }
 
 * {
@@ -11,6 +11,7 @@
 body {
   background: var(--bg);
   padding: 10px;
+  min-width: 220px;
 }
 
 .buttonContainer {
@@ -23,22 +24,25 @@ body {
 }
 
 .button {
-  border-radius: 3px;
+  cursor: pointer;
+  border-radius: 5px;
   background: var(--accent-dim);
-  border: none;
+  border: 1px solid transparent;
   color: var(--text);
-  padding: 2px 10px;
+  font-weight: lighter;
+  font-family: inherit;
+  font-size: initial;
+  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  color: #fff;
+  border-color: var(--accent-dim);
 }
+
 
 .inputContainer {
   display: flex;
   justify-content: center;
 }
-.inputGroup {
-  position: relative;
-  display: flex;
-  margin: auto;
-}
+
 
 .inputText {
   width: 20px;
@@ -47,17 +51,8 @@ body {
   border: none;
 }
 
-.inputGroup{
-  position: relative;
-  transition: all 1s;
-  width: 38px;
-  height: 38px;
-  overflow: hidden;
-  background: var(--text);
-  border-radius: 25px;
-}
 
-.inputText{
+.inputText {
   width: 100%;
   height: 100%;
   border: 0px;
@@ -66,7 +61,7 @@ body {
   font-size: 1em;
 }
 
-.fa{
+.fa {
   position: absolute;
   padding: 10px;
   top: 2px;
@@ -83,35 +78,84 @@ body {
 .fa-search {
   left: 2px;
   right: auto;
+  padding-top: 12px !important;
+  padding-left: 12px !important;
+}
+
+.fa-terminal {
+  padding-top: 12px !important;
 }
 
 #inputSearch {
   padding-left: 40px;
 }
 
-.inputGroup:hover{
+.moduleInputGroup,
+.searchInputGroup {
+  position: relative;
+  transition: all 1s;
+  width: 38px;
+  height: 38px;
+  overflow: hidden;
+  background: var(--text);
+  position: relative;
+  display: flex;
+  margin: auto;
+  border-radius: 25px;
+  margin-top: 15px;
+}
+
+.moduleInputGroup:hover,
+.searchInputGroup:hover {
   width: calc(200% + 10px);
   cursor: pointer;
   transition: all .7s;
-  /* transform: translateX(50%) */
 }
 
-#searchForm:hover {
-  width: calc(200% + 10px);
+.searchInputGroup:hover {
   transform: translateX(-50%);
-  cursor: pointer;
-  transition: all .7s;
 }
 
+.searchInputGroupOpened {
+  transform: translateX(-50%);
+  width: calc(200% + 10px);
+}
+
+.moduleInputGroupOpened {
+  width: calc(200% + 10px);
+}
+
+/* .searchInputGroup:hover {
+  transform: translateX(-50%);
+}
+ */
 #outerDiv {
   display: flex;
   flex-direction: column;
   align-items: center;
+  font-size: larger;
 }
 
 .lead {
   margin-bottom: 5px;
   color: var(--text);
-  font-family: 'Open Sans';
-  font-size: 1.2em;
+  font-family: inherit;
+  font-size: x-large;
+  font-weight: lighter;
+}
+
+#btnGithub {
+  font-family: inherit;
+  border: 1px solid transparent;
+  padding: 7px 15px;
+  font-size: larger;
+  line-height: 1.5;
+  border-radius: .25rem;
+  transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+  color: #fff;
+  background-color: #343a40;
+  border-color: #343a40;
+  cursor: pointer;
+  font-weight: lighter;
+  margin-top: 10px;
 }

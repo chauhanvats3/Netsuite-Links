@@ -7,7 +7,6 @@
     integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
   <link rel="stylesheet" href="popup.css">
   <script src="popup.js"></script>
-  <script async defer src="https://buttons.github.io/buttons.js"></script>
 </head>
 
 <body id="body">
@@ -18,26 +17,25 @@
         class="button hasFullValue">Login</button>
       <button type="button" id="btnSchema"
         value="https://system.na1.netsuite.com/help/helpcenter/en_US/srbrowser/Browser2016_1/script/record/account.html"
-        class="button hasFullValue">Schema</button>
+        class="button hasFullValue">Records Browser</button>
       <button type="button" id="btnModules" value=".app.netsuite.com/app/help/helpcenter.nl?fid=chapter_4220488571.html"
         class="button hasHalfValue">Modules</button>
       <button type="button" id="btnScriptTypes"
         value=".app.netsuite.com/app/help/helpcenter.nl?fid=chapter_4387172495.html" class="button hasHalfValue">Script
         Types</button>
 
-      <div id="loadModuleForm" class="inputGroup" autocomplete="off">
-        <input id="moduleNameInput" class="inputText"  type="text" placeholder="Load Modules...">
+      <div id="loadModules" class="moduleInputGroup" autocomplete="off">
+        <input id="moduleNameInput" class="inputText"  type="text" placeholder="Disabled Here">
         <i id="btnLoadModule" class="fa fa-terminal"></i>
       </div>
 
-      <div id="searchForm" class="inputGroup" autocomplete="off">
+      <div id="searchForm" class="searchInputGroup" autocomplete="off">
         <input id="inputSearch" class="inputText"  type="text" placeholder="SuiteAnswers">
         <i id="btnSearch" class="fa fa-search"></i>
       </div>
 
     </div>
-    <a class="github-button" href="https://github.com/chauhanvats3" aria-label="Follow @chauhanvats3 on GitHub">Follow
-      @chauhanvats3</a>
+    <button id="btnGithub" type="button" ><i class="fab fa-github"></i>  Vatsal Chauhan</button>
     <p class="lead">NetSuite Links</p>
   </div>
 </body>
