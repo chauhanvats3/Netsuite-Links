@@ -3,6 +3,10 @@
 # Use this Extension to do away with that annoying login page.
 # And a few more added features.
 
+
+# -----------------------UPDATE 2.0.1.1---------------------
+# Major UI Change
+
 # -----------------------UPDATE 1.5-----------------------------
 # Added a feature to load client-side modules on the current page.
 
