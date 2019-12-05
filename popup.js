@@ -4,7 +4,6 @@ document.addEventListener('DOMContentLoaded', function () {
     var btnSearch = document.getElementById("btnSearch");
     var inputModuleName = document.getElementById("moduleNameInput");
     var btnLoadModule = document.getElementById("btnLoadModule");
-    var btnGithub = document.getElementById("btnGithub");
     var inputGroups = document.getElementsByClassName("inputGroup");
     var defaultAccName = 'tstdrv2152924';
     var searchInputGroup = document.getElementById("searchForm");
@@ -64,8 +63,10 @@ document.addEventListener('DOMContentLoaded', function () {
         var searchQuery = inputSearch.value;
         var ansLink = "https://netsuite.custhelp.com/";
 
-        if (searchQuery.trim() != "")
+        if (searchQuery.trim() != ""){
+            searchQuery = searchQuery.replace(/ /g, "=");
             ansLink = "https://netsuite.custhelp.com/app/answers/list/st/5/kw/" + searchQuery;
+        }
 
         chrome.tabs.create({
             active: true,
@@ -115,53 +116,79 @@ document.addEventListener('DOMContentLoaded', function () {
         }
         var buttons = document.getElementsByTagName("button");
         for (var i = 0; i < buttons.length; i++) {
-
             (function () {
                 var btn = buttons[i];
-                if (btn.id != 'btnGithub') {
-                    var classNameBtn = btn.className;
-                    var isClassHalfValue = classNameBtn.includes("hasHalfValue");
-                    var btnId = btn.id;
-                    // console.log("Class = " + classNameBtn);
-                    if (isClassHalfValue) {
-                        var scheme, accName, location;
-                        scheme = "https://";
-                        location = btn.value;
-                        if (allNetsuiteTabs.length != 0) { //If any netsuite tab is open
-                            //for those who have half link, get the account id
-                            var url = allNetsuiteTabs[0].url;
-                            var urlWithoutScheme = url.slice(8);
-                            var splittedUrlArr = urlWithoutScheme.split(".", 1);
-                            var extractedAccName = splittedUrlArr[0].trim();
-                            accName = extractedAccName ? extractedAccName : defaultAccName;
-                            finalLink[btnId] = "" + scheme + accName + location;
-                        } else {
-                            //if no netsuite tab is open
-                            finalLink[btnId] = "" + scheme + defaultAccName + location;
-                        }
 
-                    } else { //for those with full link
-                        finalLink[btnId] = btn.value;
-                    }
-
-                    if (btn.id == "btnLogIn") {
-                        btn.onclick = function () { //assign on click to each button accordingly
-                            var urlLink = finalLink[this.id];
-                            chrome.tabs.update({
-                                active: true,
-                                url: urlLink
-                            });
-                        };
+                var classNameBtn = btn.className;
+                var isClassHalfValue = classNameBtn.includes("hasHalfValue");
+                var btnId = btn.id;
+                // console.log("Class = " + classNameBtn);
+                if (isClassHalfValue) {
+                    var scheme, accName, location;
+                    scheme = "https://";
+                    location = btn.value;
+                    if (allNetsuiteTabs.length != 0) { //If any netsuite tab is open
+                        //for those who have half link, get the account id
+                        var url = allNetsuiteTabs[0].url;
+                        var urlWithoutScheme = url.slice(8);
+                        var splittedUrlArr = urlWithoutScheme.split(".", 1);
+                        var extractedAccName = splittedUrlArr[0].trim();
+                        accName = extractedAccName ? extractedAccName : defaultAccName;
+                        finalLink[btnId] = "" + scheme + accName + location;
                     } else {
-                        btn.onclick = function () { //assign on click to each button accordingly
-                            var urlLink = finalLink[this.id];
-                            chrome.tabs.create({
-                                active: true,
-                                url: urlLink
-                            });
-                        };
+                        //if no netsuite tab is open
+                        finalLink[btnId] = "" + scheme + defaultAccName + location;
                     }
 
+                } else { //for those with full link
+                    finalLink[btnId] = btn.value;
+                }
+
+                if (btn.id == "btnLogIn") {
+                    var curBtnId = btn.id;
+                    btn.onclick = function () {
+                        //assign on click to each button accordingly
+                        var getCurrentTabQuery = {
+                            currentWindow: true,
+                            active: true
+                        };
+                        chrome.tabs.query(getCurrentTabQuery, function (currentWindowTabs) {
+                            var urlLink = "https://www.google.com";
+                            if (currentWindowTabs.length != 0) { //current window is present
+                                var currTab = currentWindowTabs[0];
+                                var tabUrl = currTab.url;
+                                if (tabUrl.trim() === "chrome://newtab/") {
+                                    urlLink = finalLink[curBtnId];
+                                    chrome.tabs.update({
+                                        active: true,
+                                        url: urlLink
+                                    });
+                                } else {
+                                    urlLink = finalLink[curBtnId];
+                                    chrome.tabs.create({
+                                        active: true,
+                                        url: urlLink
+                                    });
+                                }
+                            } else {
+                                urlLink = finalLink[curBtnId];
+                                chrome.tabs.create({
+                                    active: true,
+                                    url: urlLink
+                                });
+                            }
+
+                        });
+
+                    };
+                } else {
+                    btn.onclick = function () { //assign on click to each button accordingly
+                        var urlLink = finalLink[this.id];
+                        chrome.tabs.create({
+                            active: true,
+                            url: urlLink
+                        });
+                    };
                 }
             })();
         }
@@ -219,19 +246,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     }
     /*============================= Load Module ENDS ==================================== */
-
-    /*======================== Go To GitHub========================== */
-    btnGithub.addEventListener('click', goToGithub);
-
-    function goToGithub() {
-        var urlGithub = 'https://github.com/chauhanvats3/Netsuite-Links';
-        chrome.tabs.create({
-            active: true,
-            url: urlGithub
-        });
-    }
-    /* ================================ ENDS ==================================*/
-
 
     /*==============================Input Listener===================================== */
     inputSearch.addEventListener('input', inputChanged);

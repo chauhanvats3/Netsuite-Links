@@ -138,24 +138,10 @@ body {
 
 .lead {
   margin-bottom: 5px;
+  margin-top: 5px;
   color: var(--text);
   font-family: inherit;
   font-size: x-large;
   font-weight: lighter;
 }
 
-#btnGithub {
-  font-family: inherit;
-  border: 1px solid transparent;
-  padding: 7px 15px;
-  font-size: larger;
-  line-height: 1.5;
-  border-radius: .25rem;
-  transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
-  color: #fff;
-  background-color: #343a40;
-  border-color: #343a40;
-  cursor: pointer;
-  font-weight: lighter;
-  margin-top: 10px;
-}
