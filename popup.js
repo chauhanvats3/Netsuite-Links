@@ -154,54 +154,10 @@ document.addEventListener('DOMContentLoaded', function () {
                     finalLink[btnId] = btn.value;
                 }
 
-                /* if (btn.id == "btnLogIn") {
-                    var curBtnId = btn.id;
-                    btn.onclick = function () {
-                        //assign on click to each button accordingly
-                        var getCurrentTabQuery = {
-                            currentWindow: true,
-                            active: true
-                        };
-                        chrome.tabs.query(getCurrentTabQuery, function (currentWindowTabs) {
-                            var urlLink = "https://www.google.com";
-                            if (currentWindowTabs.length != 0) { //current window is present
-                                var currTab = currentWindowTabs[0];
-                                var tabUrl = currTab.url;
-                                if (tabUrl.trim() === "chrome://newtab/") {
-                                    urlLink = finalLink[curBtnId];
-                                    chrome.tabs.update({
-                                        active: true,
-                                        url: urlLink
-                                    });
-                                } else {
-                                    urlLink = finalLink[curBtnId];
-                                    chrome.tabs.create({
-                                        active: true,
-                                        url: urlLink
-                                    });
-                                }
-                            } else {
-                                urlLink = finalLink[curBtnId];
-                                chrome.tabs.create({
-                                    active: true,
-                                    url: urlLink
-                                });
-                            }
-
-                        });
-
-                    };
-                } else  */
                 if (btn.id == 'btnRecToJson') {
                     btnRecToJson.addEventListener('click', convtRecToJson);
                 } else {
-                   /*  btn.onclick = function () { //assign on click to each button accordingly
-                        var urlLink = finalLink[this.id];
-                        chrome.tabs.create({
-                            active: true,
-                            url: urlLink
-                        });
-                    }; */
+
                     var curBtnId = btn.id;
                     btn.onclick = function () {
                         //assign on click to each button accordingly
