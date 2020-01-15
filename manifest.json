@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "NetSuite Links",
-    "version": "2.0.1.2",
+    "version": "2.2.0",
     "description": "NetSuite Dev Links",
     "permissions": ["tabs", "https://*.app.netsuite.com/*"],
     "browser_action": {
@@ -17,5 +17,6 @@
         "48": "icons/icon48.png",
         "128": "icons/icon128.png"
     },
-    "content_security_policy": "script-src 'self' https://www.gstatic.com/; object-src 'self'"
+    "content_security_policy": "script-src 'self' https://www.gstatic.com/; object-src 'self'",
+    "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAoGi8+m3TKvNDUgTOJMOwclfJZ2CzkGAyle6w8fzBMv05+tMcjuXsktYTKwFdHmHK39fXJvxHerctWwS0UCzrIi20KHqg+tEDlLg0qemwoQPBRZ8Ybo4JTbAZfjs1jysQa8m/FkJtmlNN6rY5NWaI7u2vCYRvEL6mWBTWPHAplxyoH9aHIVIq5139mLgITxjJPzMqlqng5pCg1aQJKVmLTRdeIC5L4kbyTNsrCYS0PtlfjsbcN5ZKLVbzpkVBfhK3cSOan4WV417xl5+YMzOqCsOTEsivPt5LfFW9QFxpnK206f7CLNrnk3EzsgSyUHm1kuKhiFzKc9Geu3WVMNWqAwIDAQAB"
 }

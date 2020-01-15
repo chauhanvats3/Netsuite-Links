@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
+
     var finalLink = {};
     var inputSearch = document.getElementById("inputSearch");
     var btnSearch = document.getElementById("btnSearch");
@@ -10,6 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var moduleInputGroup = document.getElementById("loadModules");
     var inputBoxValue = "";
     var moduleLoadDisabled = false;
+    var btnRecToJson = document.getElementById("btnRecToJson");
 
 
 
@@ -18,6 +20,11 @@ document.addEventListener('DOMContentLoaded', function () {
         inputModuleName.placeholder = "Disabled Here!";
         btnLoadModule.addEventListener('click', doNothingOnClick);
         moduleLoadDisabled = true;
+    }
+
+    function disableRecToJSON() {
+        btnRecToJson.disabled = true;
+        btnRecToJson.innerHTML = "Disabled";
     }
 
     /**============================Search and load module animation fix=========================== */
@@ -63,7 +70,7 @@ document.addEventListener('DOMContentLoaded', function () {
         var searchQuery = inputSearch.value;
         var ansLink = "https://netsuite.custhelp.com/";
 
-        if (searchQuery.trim() != ""){
+        if (searchQuery.trim() != "") {
             searchQuery = searchQuery.replace(/ /g, "=");
             ansLink = "https://netsuite.custhelp.com/app/answers/list/st/5/kw/" + searchQuery;
         }
@@ -84,6 +91,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (allNetsuiteTabs.length == 0) { //if no netsuite tab is open
             console.log("no netsuite tab open");
             disableModuleInput();
+            disableRecToJSON();
 
         } else { //netsuite tab is open
 
@@ -106,10 +114,12 @@ document.addEventListener('DOMContentLoaded', function () {
                     } else {
                         console.log("tab doesnt include ns url");
                         disableModuleInput();
+                        disableRecToJSON();
                     }
                 } else {
                     console.log("No current window present");
                     disableModuleInput();
+                    disableRecToJSON();
                 }
 
             });
@@ -144,7 +154,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     finalLink[btnId] = btn.value;
                 }
 
-                if (btn.id == "btnLogIn") {
+                /* if (btn.id == "btnLogIn") {
                     var curBtnId = btn.id;
                     btn.onclick = function () {
                         //assign on click to each button accordingly
@@ -181,13 +191,52 @@ document.addEventListener('DOMContentLoaded', function () {
                         });
 
                     };
+                } else  */
+                if (btn.id == 'btnRecToJson') {
+                    btnRecToJson.addEventListener('click', convtRecToJson);
                 } else {
-                    btn.onclick = function () { //assign on click to each button accordingly
+                   /*  btn.onclick = function () { //assign on click to each button accordingly
                         var urlLink = finalLink[this.id];
                         chrome.tabs.create({
                             active: true,
                             url: urlLink
                         });
+                    }; */
+                    var curBtnId = btn.id;
+                    btn.onclick = function () {
+                        //assign on click to each button accordingly
+                        var getCurrentTabQuery = {
+                            currentWindow: true,
+                            active: true
+                        };
+                        chrome.tabs.query(getCurrentTabQuery, function (currentWindowTabs) {
+                            var urlLink = "https://www.google.com";
+                            if (currentWindowTabs.length != 0) { //current window is present
+                                var currTab = currentWindowTabs[0];
+                                var tabUrl = currTab.url;
+                                if (tabUrl.trim() === "chrome://newtab/") {
+                                    urlLink = finalLink[curBtnId];
+                                    chrome.tabs.update({
+                                        active: true,
+                                        url: urlLink
+                                    });
+                                } else {
+                                    urlLink = finalLink[curBtnId];
+                                    chrome.tabs.create({
+                                        active: true,
+                                        url: urlLink
+                                    });
+                                }
+                            } else {
+                                urlLink = finalLink[curBtnId];
+                                chrome.tabs.create({
+                                    active: true,
+                                    url: urlLink
+                                });
+                            }
+
+                        });
+
                     };
                 }
             })();
@@ -198,6 +247,17 @@ document.addEventListener('DOMContentLoaded', function () {
         console.log("Do Nothing");
     }
 
+    function convtRecToJson() {
+        var port = chrome.extension.connect({ //Create  a port to connect with background.js
+            name: "Module Communication"
+        });
+        port.postMessage({ //message background script to do something
+            type: 'recToJson'
+        });
+        port.onMessage.addListener(function (msg) { //Get a feedBack from Background script
+            console.log("message recieved from bg" + msg.replyFromBG);
+        });
+    }
 
 
     /*============================== LOAD MODULES Function ================================ */
@@ -231,10 +291,11 @@ document.addEventListener('DOMContentLoaded', function () {
                     name: "Module Communication"
                 });
                 port.postMessage({ //message background script to do something
-                    codeToInject: dataToSend
+                    codeToInject: dataToSend,
+                    type: 'loadModule'
                 });
                 port.onMessage.addListener(function (msg) { //Get a feedBack from Background script
-                    console.log("message recieved from bg" + msg.joke);
+                    console.log("message recieved from bg" + msg.replyFromBG);
                 });
             } else {
                 var conReply = confirm("Supported modules are 'N/*' or 'SuiteScripts/*' only");
