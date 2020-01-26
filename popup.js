@@ -17,14 +17,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function disableModuleInput() {
         inputModuleName.disabled = true;
-        inputModuleName.placeholder = "Disabled Here!";
+        inputModuleName.placeholder = "Modules Disabled!";
         btnLoadModule.addEventListener('click', doNothingOnClick);
         moduleLoadDisabled = true;
     }
 
     function disableRecToJSON() {
         btnRecToJson.disabled = true;
-        btnRecToJson.innerHTML = "Disabled";
+        btnRecToJson.innerHTML = "RecToJSON Disabled";
     }
 
     /**============================Search and load module animation fix=========================== */
