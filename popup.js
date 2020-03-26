@@ -1,3 +1,4 @@
+
 document.addEventListener('DOMContentLoaded', function () {
 
     var finalLink = {};
@@ -170,7 +171,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             if (currentWindowTabs.length != 0) { //current window is present
                                 var currTab = currentWindowTabs[0];
                                 var tabUrl = currTab.url;
-                                if (tabUrl.trim() === "chrome://newtab/") {
+                                if (tabUrl.trim() === "chrome://newtab/" || tabUrl.trim() ==="https://web.tabliss.io/") {
                                     urlLink = finalLink[curBtnId];
                                     chrome.tabs.update({
                                         active: true,

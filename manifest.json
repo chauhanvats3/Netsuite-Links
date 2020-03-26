@@ -9,7 +9,7 @@
         "default_title": "NetSuite Links"
     },
     "background": {
-        "scripts": ["background.js"],
+        "scripts": ["background_messaging.js"],
         "persistent": true
     },
     "icons": {
