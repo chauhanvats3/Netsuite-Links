@@ -1,3 +1,34 @@
+console.log("jQuery : " + $().jquery);
+
+$(function () {
+    var availableModules = [
+        "N/record",
+        "N/currentRecord",
+        "N/runtime",
+        "N/action",
+        "N/commerce/recordView",
+        "N/currency",
+        "N/email",
+        "N/format",
+        "N/format/i18n",
+        "N/http",
+        "N/log",
+        "N/portlet",
+        "N/query",
+        "N/search",
+        "N/transaction",
+        "N/translation",
+        "N/ui/dialog",
+        "N/ui/message",
+        "N/url",
+        "N/util",
+        "N/xml"
+    ];
+    $("#moduleNameInput").autocomplete({
+        source: availableModules,
+        minLength: 0
+    });
+});
 
 document.addEventListener('DOMContentLoaded', function () {
 
@@ -171,7 +202,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             if (currentWindowTabs.length != 0) { //current window is present
                                 var currTab = currentWindowTabs[0];
                                 var tabUrl = currTab.url;
-                                if (tabUrl.trim() === "chrome://newtab/" || tabUrl.trim() ==="https://web.tabliss.io/") {
+                                if (tabUrl.trim() === "chrome://newtab/" || tabUrl.trim() === "https://web.tabliss.io/") {
                                     urlLink = finalLink[curBtnId];
                                     chrome.tabs.update({
                                         active: true,
@@ -219,8 +250,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
     /*============================== LOAD MODULES Function ================================ */
     inputModuleName.addEventListener('keydown', (e) => {
+        console.log("e.key" + e.key);
         if (e.key === "Enter") {
             loadModule();
+        } else if (e.key === "Tab") {
+            console.log("tab pressed");
+            e.preventDefault();
         }
     });
     if (!moduleLoadDisabled) {

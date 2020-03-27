@@ -1,3 +1,9 @@
+.ui-autocomplete {
+  max-height: 70px;
+  overflow-y: hidden;
+  /* prevent horizontal scrollbar */
+  overflow-x: hidden;
+}
 :root {
   --bg: #232931;
   --accent-dim: #62ACE5;

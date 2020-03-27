@@ -6,7 +6,13 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
     integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
   <link rel="stylesheet" href="popup.css">
+  <script type="text/javascript" src="thirdParty/external/jquery/jQuery.js"></script>
+  <link rel="stylesheet" href="thirdParty/jquery-ui.min.css">
+  <script type="text/javascript" src="thirdParty/jquery-ui.min.js"></script>
+  <link rel="stylesheet" href="thirdParty/jquery-ui.structure.min.css">
+  <link rel="stylesheet" href="thirdParty/jquery-ui.theme.min.css">
   <script src="popup.js"></script>
+
 </head>
 
 <body id="body">
@@ -21,15 +27,16 @@
       <button type="button" id="btnModules" value=".app.netsuite.com/app/help/helpcenter.nl?fid=chapter_4220488571.html"
         class="button hasHalfValue">SS2 Modules</button>
       <button type="button" id="btnRecToJson"
-        value=".app.netsuite.com/app/help/helpcenter.nl?fid=chapter_4387172495.html" class="button">Record to JSON</button>
+        value=".app.netsuite.com/app/help/helpcenter.nl?fid=chapter_4387172495.html" class="button">Record to
+        JSON</button>
 
       <div id="loadModules" class="moduleInputGroup" autocomplete="off">
-        <input id="moduleNameInput" class="inputText"  type="text" placeholder="Disabled Here">
+        <input id="moduleNameInput" class="inputText" placeholder="Disabled Here">
         <i id="btnLoadModule" class="fa fa-terminal"></i>
       </div>
 
       <div id="searchForm" class="searchInputGroup" autocomplete="off">
-        <input id="inputSearch" class="inputText"  type="text" placeholder="SuiteAnswers">
+        <input id="inputSearch" class="inputText" type="text" placeholder="SuiteAnswers">
         <i id="btnSearch" class="fa fa-search"></i>
       </div>
 

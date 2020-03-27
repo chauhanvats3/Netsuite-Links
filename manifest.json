@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "NetSuite Links",
-    "version": "2.3.0",
+    "version": "2.3.1",
     "description": "NetSuite Dev Links",
     "permissions": ["tabs", "https://*.app.netsuite.com/*"],
     "browser_action": {
@@ -9,7 +9,7 @@
         "default_title": "NetSuite Links"
     },
     "background": {
-        "scripts": ["background_messaging.js"],
+        "scripts": ["thirdParty/external/jquery/jQuery.js","module_loader.js"],
         "persistent": true
     },
     "icons": {
