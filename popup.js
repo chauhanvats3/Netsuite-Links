@@ -26,7 +26,7 @@ $(function () {
     ];
     $("#moduleNameInput").autocomplete({
         source: availableModules,
-        minLength: 0
+        minLength: 1
     });
 });
 
