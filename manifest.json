@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "NetSuite Links",
-    "version": "2.3.5",
+    "version": "2.5.0",
     "description": "NetSuite Dev Links",
     "permissions": ["tabs", "https://*.app.netsuite.com/*"],
     "browser_action": {
@@ -9,7 +9,7 @@
         "default_title": "NetSuite Links"
     },
     "background": {
-        "scripts": ["thirdParty/external/jquery/jQuery.js", "messagingBackbone.js","moduleLoadshortcut_handler.js"],
+        "scripts": ["thirdParty/external/jquery/jQuery.js", "messagingBackbone.js","shortcut_handler.js"],
         "persistent": true
     },
     "icons": {
@@ -26,6 +26,13 @@
             "mac": "Command+M"
           },
           "description": "Load Modules via Shortcut."
+        },
+        "search-suite-answers-shrtct": {
+          "suggested_key": {
+            "default": "Ctrl+Shift+S",
+            "mac": "Command+Shift+S"
+          },
+          "description": "Search SuiteAnswers via Shortcut."
         },
         "_execute_browser_action": {
           "suggested_key": {

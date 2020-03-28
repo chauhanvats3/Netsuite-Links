@@ -19,7 +19,6 @@ document.addEventListener('DOMContentLoaded', function () {
             "N/currentRecord",
             "N/runtime",
             "N/action",
-            "N/commerce/recordView",
             "N/currency",
             "N/email",
             "N/format",
@@ -138,7 +137,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     if (tabUrl.includes("app.netsuite.com")) {
                         console.log("tab includes ns url");
                         inputModuleName.style.display = "block";
-                        inputModuleName.placeholder = "Load Modules";
+                        inputModuleName.placeholder = "Shortcut > Ctrl + M";
                     } else {
                         console.log("tab doesnt include ns url");
                         disableModuleInput();

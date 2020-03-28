@@ -1,3 +1,9 @@
+:root {
+  --bg: #232931;
+  --accent-dim: #62ACE5;
+  --text: #f1f1f1;
+}
+
 #vatsModuleOverlay {
   position: fixed;
   display: none;
@@ -14,12 +20,20 @@
 
 #vatsModuleOverlayInput{
   position: absolute;
+  border-radius: 10px 10px 0px 0px;
   top: 50%;
   left: 50%;
-  font-size: 50px;
-  color: black;
+  width: 70%;
+  color: var(--text);
   transform: translate(-50%,-50%);
   -ms-transform: translate(-50%,-50%);
+  background-color: var(--bg);
+  border: 0px;
+  padding: 15px;
+  font-size: 1.75em;
+  cursor: text;
+  text-align: center;
+  caret-color: var(--accent-dim);
 }
 
 .ui-autocomplete {
@@ -27,4 +41,9 @@
   overflow-y: hidden;
   /* prevent horizontal scrollbar */
   overflow-x: hidden;
+  text-align: center;
 }
+
+
+
+
