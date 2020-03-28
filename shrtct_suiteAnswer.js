@@ -6,7 +6,7 @@ var inputSearchQuery;
 function setupOverlay() {
     if (jQuery("#searchAnswerOverlayVTS")[0] == void 0) {
 
-        jQuery("<div id='searchAnswerOverlayVTS' class='searchInputGroup'><input id='searchAnswerOverlayVTSInput' placeholder='Search SuiteAnswer' class='searchInputText'></div>").appendTo("#body");
+        jQuery("<div id='searchAnswerOverlayVTS' class='searchInputGroup'><input id='searchAnswerOverlayVTSInput' placeholder='Search SuiteAnswers' class='searchInputText'></div>").appendTo("body");
 
         jQuery("<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.3.1/css/all.css'>").appendTo("head");
 

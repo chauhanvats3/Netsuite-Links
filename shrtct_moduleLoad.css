@@ -32,7 +32,6 @@
   padding: 15px;
   font-size: 1.75em;
   cursor: text;
-  text-align: center;
   caret-color: var(--accent-dim);
 }
 
@@ -41,7 +40,6 @@
   overflow-y: hidden;
   /* prevent horizontal scrollbar */
   overflow-x: hidden;
-  text-align: center;
 }
 
 

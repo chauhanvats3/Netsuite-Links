@@ -137,7 +137,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     if (tabUrl.includes("app.netsuite.com")) {
                         console.log("tab includes ns url");
                         inputModuleName.style.display = "block";
-                        inputModuleName.placeholder = "Shortcut > Ctrl + M";
+                        inputModuleName.placeholder = "LoadModule > Ctrl + M";
                     } else {
                         console.log("tab doesnt include ns url");
                         disableModuleInput();
