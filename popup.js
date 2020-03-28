@@ -1,35 +1,3 @@
-console.log("jQuery : " + $().jquery);
-
-$(function () {
-    var availableModules = [
-        "N/record",
-        "N/currentRecord",
-        "N/runtime",
-        "N/action",
-        "N/commerce/recordView",
-        "N/currency",
-        "N/email",
-        "N/format",
-        "N/format/i18n",
-        "N/http",
-        "N/log",
-        "N/portlet",
-        "N/query",
-        "N/search",
-        "N/transaction",
-        "N/translation",
-        "N/ui/dialog",
-        "N/ui/message",
-        "N/url",
-        "N/util",
-        "N/xml"
-    ];
-    $("#moduleNameInput").autocomplete({
-        source: availableModules,
-        minLength: 1
-    });
-});
-
 document.addEventListener('DOMContentLoaded', function () {
 
     var finalLink = {};
@@ -45,7 +13,35 @@ document.addEventListener('DOMContentLoaded', function () {
     var moduleLoadDisabled = false;
     var btnRecToJson = document.getElementById("btnRecToJson");
 
-
+    $(function () {
+        var availableModules = [
+            "N/record",
+            "N/currentRecord",
+            "N/runtime",
+            "N/action",
+            "N/commerce/recordView",
+            "N/currency",
+            "N/email",
+            "N/format",
+            "N/format/i18n",
+            "N/http",
+            "N/log",
+            "N/portlet",
+            "N/query",
+            "N/search",
+            "N/transaction",
+            "N/translation",
+            "N/ui/dialog",
+            "N/ui/message",
+            "N/url",
+            "N/util",
+            "N/xml"
+        ];
+        $("#moduleNameInput").autocomplete({
+            source: availableModules,
+            minLength: 1
+        });
+    });
 
     function disableModuleInput() {
         inputModuleName.disabled = true;

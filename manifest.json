@@ -9,7 +9,7 @@
         "default_title": "NetSuite Links"
     },
     "background": {
-        "scripts": ["thirdParty/external/jquery/jQuery.js","module_loader.js"],
+        "scripts": ["thirdParty/external/jquery/jQuery.js", "messagingBackbone.js","moduleLoadshortcut_handler.js"],
         "persistent": true
     },
     "icons": {
@@ -18,5 +18,29 @@
         "128": "icons/icon128.png"
     },
     "content_security_policy": "script-src 'self' https://www.gstatic.com/; object-src 'self'",
-    "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAoGi8+m3TKvNDUgTOJMOwclfJZ2CzkGAyle6w8fzBMv05+tMcjuXsktYTKwFdHmHK39fXJvxHerctWwS0UCzrIi20KHqg+tEDlLg0qemwoQPBRZ8Ybo4JTbAZfjs1jysQa8m/FkJtmlNN6rY5NWaI7u2vCYRvEL6mWBTWPHAplxyoH9aHIVIq5139mLgITxjJPzMqlqng5pCg1aQJKVmLTRdeIC5L4kbyTNsrCYS0PtlfjsbcN5ZKLVbzpkVBfhK3cSOan4WV417xl5+YMzOqCsOTEsivPt5LfFW9QFxpnK206f7CLNrnk3EzsgSyUHm1kuKhiFzKc9Geu3WVMNWqAwIDAQAB"
+    "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAoGi8+m3TKvNDUgTOJMOwclfJZ2CzkGAyle6w8fzBMv05+tMcjuXsktYTKwFdHmHK39fXJvxHerctWwS0UCzrIi20KHqg+tEDlLg0qemwoQPBRZ8Ybo4JTbAZfjs1jysQa8m/FkJtmlNN6rY5NWaI7u2vCYRvEL6mWBTWPHAplxyoH9aHIVIq5139mLgITxjJPzMqlqng5pCg1aQJKVmLTRdeIC5L4kbyTNsrCYS0PtlfjsbcN5ZKLVbzpkVBfhK3cSOan4WV417xl5+YMzOqCsOTEsivPt5LfFW9QFxpnK206f7CLNrnk3EzsgSyUHm1kuKhiFzKc9Geu3WVMNWqAwIDAQAB",
+    "commands": {
+        "load-module-shrtct": {
+          "suggested_key": {
+            "default": "Ctrl+M",
+            "mac": "Command+M"
+          },
+          "description": "Load Modules via Shortcut."
+        },
+        "_execute_browser_action": {
+          "suggested_key": {
+            "windows": "Ctrl+Shift+Y",
+            "mac": "Command+Shift+Y",
+            "chromeos": "Ctrl+Shift+U",
+            "linux": "Ctrl+Shift+J"
+          }
+        },
+        "_execute_page_action": {
+          "suggested_key": {
+            "default": "Ctrl+Shift+E",
+            "windows": "Alt+Shift+P",
+            "mac": "Alt+Shift+P"
+          }
+        }
+      }
 }
