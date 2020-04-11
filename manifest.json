@@ -2,7 +2,7 @@
     "manifest_version": 2,
     "name": "NetSuite Links",
     "version": "2.6.0",
-    "description": "NetSuite Dev Links",
+    "description": "Load N/* Modules , search via Shortcut and More.",
     "permissions": ["tabs", "https://*.app.netsuite.com/*"],
     "browser_action": {
         "default_popup": "popup.html",
