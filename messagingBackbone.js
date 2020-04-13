@@ -8,16 +8,29 @@ chrome.extension.onConnect.addListener(function (port) { //Listen to any incomin
                 var modVarName = splittedArr[0];
                 var modName = splittedArr[1];
                 //Define a string to tell chrome api to inject a piece of code
-                var codeBGtoPage = "(function() {";
-                //Overriding window.onError
-                codeBGtoPage += "var codeToExecute ='window.onerror = function (msg, url, line, col, error) { alert(error.message); var extra = !col ? \"\" : \"\\\ncolumn: \" + col; extra += !error ? \"\" : \"\\\nerror: \" + error;console.log(\"Error: \" + msg + \"\\\nurl: \" + url + \"\\\n line: \" + line + extra); var suppressErrorAlert = true;return suppressErrorAlert;};'";
-                //using require()
-                codeBGtoPage += ";codeToExecute+= ';require([\"" + modName + "\"],function(){window[\"" + modVarName + "\"] = require(\"" + modName + "\"); console.log(\" Loaded : "+modName+"  \");alert(\"Module : " + modName + "\\\\nVariableName : " + modVarName + "\\\\nUse in Console!\");  });';";
-                //creating a <script> tag to insert script
-                codeBGtoPage += ";var script = document.createElement('script');"; //So ,we had to do all this charade because sending require directly wouldn't work
-                codeBGtoPage += "script.textContent = codeToExecute;";
-                codeBGtoPage += "document.body.appendChild(script);";
-                codeBGtoPage += "})();";
+                var codeBGtoPage = `(function() {
+                    //Overriding window.onError
+                    var codeToExecute = \` window.onerror = function (msg, url, line, col, error) {
+                        if (error.message.trim() == "require is not defined")
+                            alert("Not A Record Page, Can't Load Modules!");
+                        else
+                            alert(error.message);
+                        var extra = !col ? "" : "\\\\ncolumn: " + col;
+                        extra += !error ? "" : "\\\\nerror: " + error;
+                        console.log("Error: " + msg + "\\\\nURL: " + url + "\\\\n Line: " + line + "\\\\nExtra: " + extra);
+                        var suppressErrorAlert = true;
+                        return suppressErrorAlert;
+                    };
+                    require(["${modName}"], function () {
+                        window["${modVarName}"] = require("${modName}");
+                        console.log(" Loaded : ${modName}");
+                        alert("Module : ${modName} \\\\nVariableName : ${modVarName} \\\\nUse in Console!");
+                    });\`;
+                    //creating a <script> tag to insert script
+                    ;var script = document.createElement('script'); //So ,we had to do all this charade because sending require directly wouldn't work
+                    script.textContent = codeToExecute;
+                    document.body.appendChild(script);
+                    })();`;
 
                 //sending this code tp page for injection
                 chrome.tabs.executeScript({

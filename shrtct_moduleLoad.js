@@ -1,5 +1,5 @@
 (function () {
-  var codeToExecute = `
+    var codeToExecute = `
 
   var inputModuleName;
   var loadTwoTimes = false;
@@ -84,13 +84,14 @@
           if (error.message == '$(...).autocomplete is not a function' || error.message.indexOf("Mismatched anonymous define() module:") != -1)
               loadTwoTimes = true;
           else {
+              if(error.message.trim() == "require is not defined")
+              alert("Not A Record Page, Can't Load Modules!");
+              else
               alert(error.message);
               var extra = !col ? "" : "\\ncolumn: " + col;
               extra += !error ? "" : "\\nerror: " + error;
               console.log("Error: " + msg + "\\nurl: " + url + "\\n line: " + line + extra);
           }
-  
-  
           var suppressErrorAlert = true;
           return suppressErrorAlert;
       };
@@ -151,7 +152,7 @@
   });
 
 `;
-  var script = document.createElement('script'); //So ,we had to do all this charade because sending require directly wouldn't work
-  script.textContent = codeToExecute;
-  document.body.appendChild(script);
+    var script = document.createElement('script'); //So ,we had to do all this charade because sending require directly wouldn't work
+    script.textContent = codeToExecute;
+    document.body.appendChild(script);
 })();
