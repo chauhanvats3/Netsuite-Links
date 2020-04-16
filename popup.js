@@ -120,6 +120,7 @@ document.addEventListener('DOMContentLoaded', function () {
     /* ================================= Search Answers ENDS ============================================ */
 
 
+    /*========================All Button Logic================= */
     var getAllNetsuiteTabsQuery = {
         'url': "https://*.app.netsuite.com/*"
     };
@@ -235,6 +236,8 @@ document.addEventListener('DOMContentLoaded', function () {
             })();
         }
     });
+    /*==============All button logic Ends=========================== */
+
 
     function doNothingOnClick() {
         console.log("Do Nothing");
@@ -255,11 +258,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
     /*============================== LOAD MODULES Function ================================ */
     inputModuleName.addEventListener('keydown', (e) => {
-        console.log("e.key" + e.key);
+        // console.log("e.key" + e.key);
         if (e.key === "Enter") {
             loadModule();
         } else if (e.key === "Tab") {
-            console.log("tab pressed");
+            //console.log("tab pressed");
             e.preventDefault();
         }
     });
@@ -315,9 +318,9 @@ document.addEventListener('DOMContentLoaded', function () {
         inputBoxValue = caller.value;
         whichInputBox = caller.id;
         if (inputBoxValue) {
-            console.log("Caller Has Value");
-            
-            
+            //console.log("Caller Has Value");
+
+
         } else {
             switch (caller.id) {
                 case "inputSearch":
@@ -326,7 +329,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     break;
                 case "moduleNameInput":
                     moduleInputGroup.classList.remove("moduleInputGroupOpened");
-                    moduleInputGroup.style.zIndex = "0";                   
+                    moduleInputGroup.style.zIndex = "0";
                     break;
             }
 
@@ -335,4 +338,25 @@ document.addEventListener('DOMContentLoaded', function () {
 
     /*======================================Input Listener Ends============================ */
 
+
+
+    /*================================Multi Instance Loader=================== */
+    function ldisplayOtherInstanceData() {
+        var instanceId = "5406540-sb2";
+        chrome.storage.local.get("allInstancesData", function (items) {
+            // console.log("Got from memory : " + JSON.stringify(items));
+            if (jQuery.isEmptyObject(items))
+                console.log("Data enmpty");
+            else {
+                if (!items.allInstancesData.hasOwnProperty(instanceId))
+                    console.log("Selected instance data not available");
+                else {
+                    console.log("Data : " + JSON.stringify(items));
+                    // console.log("This account data already exists");
+
+                }
+            }
+        });
+    }
+    /*=====================Multi Instance Loader Ends=============== */
 });

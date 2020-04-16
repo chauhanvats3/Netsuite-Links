@@ -61,6 +61,19 @@ chrome.commands.onCommand.addListener(function (command) {
                             console.log(results);
                         });
 
+                    }else if(command === "multi-instance-shrtct"){
+                        chrome.tabs.insertCSS({
+                            file: "shrtct_multi_instances.css"
+                        }, function (results) {
+                            console.log(results);
+                        });
+
+                        /* ===========JavaScript Insertion============ */
+                        chrome.tabs.executeScript({
+                            file: "shrtct_multi_instances.js"
+                        }, function (results) {
+                            console.log(results);
+                        });
                     }
                 } else {
                     console.log("tab doesnt include ns url");
