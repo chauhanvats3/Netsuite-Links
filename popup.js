@@ -370,7 +370,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function multiInstClick() {
         $("#outerDiv")[0].style.display = "none";
-        $("#multiInstanceDiv")[0].style.display = "flex";
+        $("#multiInstanceDiv")[0].style.display = "block";
     }
     /*=====================Multi Instance Loader Ends=============== */
 
