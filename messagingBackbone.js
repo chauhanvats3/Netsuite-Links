@@ -59,8 +59,3 @@ chrome.extension.onConnect.addListener(function (port) { //Listen to any incomin
     as soon as the script tag gets inserted, it starts executing in the web page's context.
     We couldn't do it the normal way because I guess require() exists only for the web page and not for the chrome
 */
-/*Structure : 
-            1. " aka doubleQuotes to enclose string to be inserted in codeBGtoPage
-            2. ' aka singleQuote to enclose strings that are to be inserted in codeToExecute
-            3. \"  aka escape doubleQuote to enclose strings as strings and NOT code in codeToExecute
-             */

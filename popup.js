@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var searchInputGroup = document.getElementById("searchForm");
     var moduleInputGroup = document.getElementById("loadModules");
     var inputBoxValue = "";
+    var whichInputBox = "";
     var moduleLoadDisabled = false;
     var btnRecToJson = document.getElementById("btnRecToJson");
 
@@ -60,16 +61,20 @@ document.addEventListener('DOMContentLoaded', function () {
         eachIG.addEventListener("mouseleave", e => {
             switch (eachIG.id) {
                 case "searchForm":
-                    if (inputBoxValue)
+                    if (inputBoxValue && whichInputBox == "inputSearch")
                         searchInputGroup.classList.add("searchInputGroupOpened");
-                    else
+                    else {
                         searchInputGroup.classList.remove("searchInputGroupOpened");
+                        eachIG.style.zIndex = "0";
+                    }
                     break;
                 case "loadModules":
-                    if (inputBoxValue)
+                    if (inputBoxValue && whichInputBox == 'moduleNameInput')
                         moduleInputGroup.classList.add("moduleInputGroupOpened");
-                    else
+                    else {
                         moduleInputGroup.classList.remove("moduleInputGroupOpened");
+                        eachIG.style.zIndex = "0";
+                    }
                     break;
             }
 
@@ -79,6 +84,11 @@ document.addEventListener('DOMContentLoaded', function () {
         });
         eachIG.addEventListener("mouseenter", e => {
             eachIG.style.zIndex = "1";
+            if (eachIG == searchInputGroup)
+                inputModuleName.value = "";
+            if (eachIG == moduleInputGroup)
+                inputSearch.value = "";
+            inputBoxValue = "";
         });
     });
     /**================================== Animation Fix ENDS =============================================== */
@@ -303,15 +313,20 @@ document.addEventListener('DOMContentLoaded', function () {
     function inputChanged(e) {
         var caller = e.target || e.srcElement;
         inputBoxValue = caller.value;
+        whichInputBox = caller.id;
         if (inputBoxValue) {
             console.log("Caller Has Value");
+            
+            
         } else {
             switch (caller.id) {
                 case "inputSearch":
                     searchInputGroup.classList.remove("searchInputGroupOpened");
+                    searchInputGroup.style.zIndex = "0";
                     break;
                 case "moduleNameInput":
                     moduleInputGroup.classList.remove("moduleInputGroupOpened");
+                    moduleInputGroup.style.zIndex = "0";                   
                     break;
             }
 
