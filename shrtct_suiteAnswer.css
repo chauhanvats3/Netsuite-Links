@@ -1,6 +1,6 @@
 :root {
     --bg: #232931;
-    --accent-dim: #62ACE5;
+    --accent: #62ACE5;
     --text: #f1f1f1;
   }
   
@@ -32,7 +32,7 @@
     padding: 15px;
     font-size: 1.75em;
     cursor: text;
-    caret-color: var(--accent-dim);
+    caret-color: var(--accent);
   }
   
  

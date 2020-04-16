@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var whichInputBox = "";
     var moduleLoadDisabled = false;
     var btnRecToJson = document.getElementById("btnRecToJson");
-    setupOtherInstanceBtns();
+    // setupOtherInstanceBtns();
     $(function () {
         var availableModules = [
             "N/record",
@@ -119,6 +119,33 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     /* ================================= Search Answers ENDS ============================================ */
 
+    /*==============================Input Listener===================================== */
+    inputSearch.addEventListener('input', inputChanged);
+    inputModuleName.addEventListener('input', inputChanged);
+
+
+    function inputChanged(e) {
+        var caller = e.target || e.srcElement;
+        inputBoxValue = caller.value;
+        whichInputBox = caller.id;
+        if (inputBoxValue) {
+            //console.log("Caller Has Value");
+
+
+        } else {
+            switch (caller.id) {
+                case "inputSearch":
+                    searchInputGroup.classList.remove("searchInputGroupOpened");
+                    searchInputGroup.style.zIndex = "0";
+                    break;
+                case "moduleNameInput":
+                    moduleInputGroup.classList.remove("moduleInputGroupOpened");
+                    moduleInputGroup.style.zIndex = "0";
+                    break;
+            }
+        }
+    }
+    /*======================================Input Listener Ends============================ */
 
     /*========================All Button Logic================= */
     var getAllNetsuiteTabsQuery = {
@@ -195,11 +222,13 @@ document.addEventListener('DOMContentLoaded', function () {
                     finalLink[btnId] = btn.value;
 
                 }
-                if (btn.id == "btnMultiInstances") {
-                    btn.addEventListener("click", multiInstClick);
-                } else if (btn.id == 'btnRecToJson') {
-                    btnRecToJson.addEventListener('click', convtRecToJson);
-                } else {
+              if (btn.id == "btnMultiInstances") {
+                btn.addEventListener("click", multiInstClick);
+              } else if (btn.id == 'btnRecToJson') {
+                btnRecToJson.addEventListener('click', convtRecToJson);
+              } else if (btn.id == 'returnToPrimary') {
+                btn.addEventListener("click", secondaryBackClick);
+              } else {
 
                     var curBtnId = btn.id;
                     btn.onclick = function () {
@@ -313,35 +342,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     /*============================= Load Module ENDS ==================================== */
 
-    /*==============================Input Listener===================================== */
-    inputSearch.addEventListener('input', inputChanged);
-    inputModuleName.addEventListener('input', inputChanged);
-
-
-    function inputChanged(e) {
-        var caller = e.target || e.srcElement;
-        inputBoxValue = caller.value;
-        whichInputBox = caller.id;
-        if (inputBoxValue) {
-            //console.log("Caller Has Value");
-
-
-        } else {
-            switch (caller.id) {
-                case "inputSearch":
-                    searchInputGroup.classList.remove("searchInputGroupOpened");
-                    searchInputGroup.style.zIndex = "0";
-                    break;
-                case "moduleNameInput":
-                    moduleInputGroup.classList.remove("moduleInputGroupOpened");
-                    moduleInputGroup.style.zIndex = "0";
-                    break;
-            }
-
-        }
-    }
-
-    /*======================================Input Listener Ends============================ */
+  
 
 
 
@@ -360,17 +361,21 @@ document.addEventListener('DOMContentLoaded', function () {
                     var instanceId = eachInstData.id;
                     var instUsrName = eachInstData.instanceUserName;
                     var instURL = eachInstData.url;
-                    var eachBtnStr = `<button type="button" id="btn${instanceId}" value="${instURL}" class="button hasFullValue instanceLink">${compNInst} </br> ${instUsrName}</button>`;
+                    var eachBtnStr = `<button id="btn${instanceId}" value="${instURL}" class="button hasFullValue instanceLink">${compNInst} </br> ${instUsrName}</button>`;
                     $(eachBtnStr).insertBefore("#multInstLead");
                 }
             }
         });
-        $("#multiInstanceDiv")[0].style.display = "none";
+        $("#secondary")[0].style.display = "none";
     }
 
     function multiInstClick() {
-        $("#outerDiv")[0].style.display = "none";
-        $("#multiInstanceDiv")[0].style.display = "flex";
+        $("#primary")[0].style.display = "none";
+        $("#secondary")[0].style.display = "flex";
+    }
+    function secondaryBackClick() {
+        $("#secondary")[0].style.display = "none";
+        $("#primary")[0].style.display = "flex";
     }
     /*=====================Multi Instance Loader Ends=============== */
 

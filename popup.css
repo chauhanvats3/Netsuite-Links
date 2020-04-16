@@ -6,7 +6,8 @@
 }
 :root {
   --bg: #232931;
-  --accent-dim: #62ACE5;
+  --bg-light: #333941;
+  --accent: #62ACE5;
   --text: #f1f1f1;
 }
 * {
@@ -15,55 +16,68 @@
 
 body {
   background: var(--bg);
-  padding: 10px;
-  min-width: 230px;
-  width: fit-content;
-  display: flex;
+  margin: 0px;
 }
 
-.buttonContainer {
+.buttons{
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
-  gap: 10px 10px;
-  margin-bottom: 10px;
-  width: 100%;
+  grid-template: 1fr 1fr / 1fr 1fr;
+  background: var(--bg-light);
+  grid-gap: 2px;
+  padding: 2px;
 }
 
 .button {
   cursor: pointer;
-  border-radius: 5px;
-  background: var(--accent-dim);
-  border: 1px solid transparent;
+  background: var(--bg);
+  border: none;
   color: var(--text);
   font-weight: lighter;
   font-family: inherit;
   font-size: initial;
-  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-  border-color: var(--accent-dim);
+  padding: 20px;
+  transition: box-shadow .2s ease-in-out;
 }
 
+.button:hover { box-shadow: inset 0 0 3px var(--accent);}
 
-.inputContainer {
-  display: flex;
-  justify-content: center;
+.inputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 20px;
 }
 
-
-.inputText {
-  width: 20px;
-  height: 20px;
-  border-radius: 50px;
-  border: none;
+.moduleInputGroup,
+.searchInputGroup {
+  position: relative;
+  transition: all .8s;
+  width: 38px;
+  height: 38px;
+  overflow: hidden;
+  border-radius: 25px;
+  cursor: pointer;
+  margin: auto;
 }
 
+.moduleInputGroup:hover, 
+.searchInputGroup:hover {
+  box-shadow: 0 0 10px var(--accent);
+  width: 200%;
+}
+.searchInputGroup:hover { transform: translateX(-50%) }
+.searchInputGroupOpened { transform: translateX(-50%) }
+
+.moduleInputGroupOpened, .searchInputGroupOpened {
+  width: calc(200%);
+}
 
 .inputText {
   width: 100%;
   height: 100%;
-  border: 0px;
+  border: none;
   outline: 0;
-  padding: 15px;
+  padding-left: 15px;
+  padding-right: 40px;
   font-size: 1em;
 }
 
@@ -76,72 +90,9 @@ body {
   height: 34px;
   border-radius: 50%;
   font-size: .8em;
-  color: var(--accent-dim);
+  color: var(--accent);
   background: var(--bg);
   transition: all 1s;
-}
-
-.fa-search {
-  left: 2px;
-  right: auto;
-  padding-top: 12px !important;
-  padding-left: 12px !important;
-}
-
-.fa-terminal {
-  padding-top: 12px !important;
-}
-
-#inputSearch {
-  padding-left: 40px;
-}
-
-.moduleInputGroup,
-.searchInputGroup {
-  position: relative;
-  transition: all 1s;
-  width: 38px;
-  height: 38px;
-  overflow: hidden;
-  background: var(--text);
-  position: relative;
-  display: flex;
-  margin: auto;
-  border-radius: 25px;
-  margin-top: 15px;
-}
-
-.moduleInputGroup:hover,
-.searchInputGroup:hover {
-  width: calc(200% + 10px);
-  cursor: pointer;
-  transition: all .7s;
-}
-
-.searchInputGroup:hover {
-  transform: translateX(-50%);
-}
-
-.searchInputGroupOpened {
-  transform: translateX(-50%);
-  width: calc(200% + 10px);
-}
-
-.moduleInputGroupOpened {
-  width: calc(200% + 10px);
-}
-
-/* .searchInputGroup:hover {
-  transform: translateX(-50%);
-}
- */
-#outerDiv {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-size: larger;
-  top: 0;
-  left: 0;
 }
 
 .lead {
@@ -151,15 +102,17 @@ body {
   font-family: inherit;
   font-size: x-large;
   font-weight: lighter;
+  text-align: center;
 }
 
-#multiInstanceDiv{
+#secondary{
+  position: absolute;
+  top: 0;
+  left: -100vw;
   display: flex;
   flex-direction: column;
   align-items: center;
   font-size: larger;
-  top: 0;
-  left: 0;
 }
 
 .instanceLink{

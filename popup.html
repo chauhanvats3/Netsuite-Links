@@ -16,37 +16,47 @@
 </head>
 
 <body id="body">
-  <div id="outerDiv">
-    <div class="buttonContainer">
+  <div class="scroll-wrapper">
+    <div id="primary">
+      <div class="buttons">
+        <button class="button hasNoValue" id="btnMultiInstances" value="">
+           Multi Instances
+        </button>
+        <button class="button hasFullValue" id="btnSchema"
+          value="https://system.na1.netsuite.com/help/helpcenter/en_US/srbrowser/Browser2016_1/script/record/account.html">
+          Records Browser
+        </button>
+        <button class="button hasHalfValue" id="btnModules"
+          value=".app.netsuite.com/app/help/helpcenter.nl?fid=chapter_4220488571.html">
+          SS2 Modules
+        </button>
+        <button class="button" id="btnRecToJson"
+          value=".app.netsuite.com/app/help/helpcenter.nl?fid=chapter_4387172495.html">
+          Record to JSON
+        </button>
+      </div> <!--buttons-->
 
-      <button type="button" id="btnMultiInstances" value=""
-        class="button hasNoValue">Multi Instances</button>
-      <button type="button" id="btnSchema"
-        value="https://system.na1.netsuite.com/help/helpcenter/en_US/srbrowser/Browser2016_1/script/record/account.html"
-        class="button hasFullValue">Records Browser</button>
-      <button type="button" id="btnModules" value=".app.netsuite.com/app/help/helpcenter.nl?fid=chapter_4220488571.html"
-        class="button hasHalfValue">SS2 Modules</button>
-      <button type="button" id="btnRecToJson"
-        value=".app.netsuite.com/app/help/helpcenter.nl?fid=chapter_4387172495.html" class="button">Record to
-        JSON</button>
+      <div class="inputs">
+        <div id="loadModules" class="moduleInputGroup" autocomplete="off">
+          <input id="moduleNameInput" class="inputText" placeholder="Disabled Here">
+          <i id="btnLoadModule" class="fa fa-terminal"></i>
+        </div>
 
-      <div id="loadModules" class="moduleInputGroup" autocomplete="off">
-        <input id="moduleNameInput" class="inputText" placeholder="Disabled Here">
-        <i id="btnLoadModule" class="fa fa-terminal"></i>
-      </div>
+        <div id="searchForm" class="searchInputGroup" autocomplete="off">
+          <input id="inputSearch" class="inputText" placeholder="Search > Ctrl+Shift+S">
+          <i id="btnSearch" class="fa fa-search"></i>
+        </div>
+      </div> <!-- inputs -->
 
-      <div id="searchForm" class="searchInputGroup" autocomplete="off">
-        <input id="inputSearch" class="inputText" type="text" placeholder="Search > Ctrl+Shift+S">
-        <i id="btnSearch" class="fa fa-search"></i>
-      </div>
+      <p class="lead">NetSuite Links</p>
 
+    </div> <!-- primary -->
+
+    <div id="secondary">
+      <button class="button" id="returnToPrimary">Back</button>
+      <p id="multInstLead" class="lead">NetSuite Links</p>
     </div>
-    <p class="lead">NetSuite Links</p>
-  </div>
-  <div id="multiInstanceDiv">
-    
-    <p id="multInstLead" class="lead">NetSuite Links</p>
-  </div>
+  </div> <!-- scroll-wrapper -->
 </body>
 
 </html>
