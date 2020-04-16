@@ -16,7 +16,9 @@
 body {
   background: var(--bg);
   padding: 10px;
-  min-width: 220px;
+  min-width: 230px;
+  width: fit-content;
+  display: flex;
 }
 
 .buttonContainer {
@@ -38,7 +40,6 @@ body {
   font-family: inherit;
   font-size: initial;
   transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-  color: #fff;
   border-color: var(--accent-dim);
 }
 
@@ -139,6 +140,8 @@ body {
   flex-direction: column;
   align-items: center;
   font-size: larger;
+  top: 0;
+  left: 0;
 }
 
 .lead {
@@ -150,3 +153,18 @@ body {
   font-weight: lighter;
 }
 
+#multiInstanceDiv{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: larger;
+  top: 0;
+  left: 0;
+}
+
+.instanceLink{
+  width: 200px;
+  height: 50px;
+  margin: 5px;
+  padding: 5px;
+}
