@@ -3,20 +3,21 @@
   "name": "NetSuite Links",
   "version": "2.6.5",
   "description": "Load N/* Modules , search via Shortcut and More.",
-  "permissions": ["tabs", "https://*.app.netsuite.com/*","storage"],
+  "permissions": ["tabs", "https://*.app.netsuite.com/*", "storage"],
   "browser_action": {
-    "default_popup": "popup.html",
+    "default_popup": "popup/popup.html",
     "default_title": "NetSuite Links"
   },
   "background": {
-    "scripts": ["thirdParty/external/jquery/jQuery.js", "messagingBackbone.js", "shortcut_handler.js"],
+    "scripts": ["thirdParty/external/jquery/jQuery.js", "myScripts/messagingBackbone.js", "shortcuts/shortcut_handler.js"],
     "persistent": true
   },
   "content_scripts": [{
     "matches": [
       "https://*.app.netsuite.com/*"
     ],
-    "js": ["thirdParty/external/jquery/jQuery.js","cntntScrptMultiInstance.js"]
+    "js": ["thirdParty/external/jquery/jQuery.js", "thirdParty/jquery-ui.min.js", "myScripts/contentScrptMultiInstance.js"],
+    "css": ["thirdParty/jquery-ui.structure.min.css", "thirdParty/jquery-ui.min.css", "thirdParty/jquery-ui.theme.min.css", "shortcuts/shrtct_moduleLoad.css", "shortcuts/shrtct_suiteAnswer.css", "shortcuts/shrtct_multi_instances.css"]
   }],
   "icons": {
     "16": "icons/NewIconStar16.png",

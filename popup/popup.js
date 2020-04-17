@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var whichInputBox = "";
     var moduleLoadDisabled = false;
     var btnRecToJson = document.getElementById("btnRecToJson");
-    // setupOtherInstanceBtns();
+    setupOtherInstanceBtns();
     $(function () {
         var availableModules = [
             "N/record",
@@ -222,13 +222,13 @@ document.addEventListener('DOMContentLoaded', function () {
                     finalLink[btnId] = btn.value;
 
                 }
-              if (btn.id == "btnMultiInstances") {
-                btn.addEventListener("click", multiInstClick);
-              } else if (btn.id == 'btnRecToJson') {
-                btnRecToJson.addEventListener('click', convtRecToJson);
-              } else if (btn.id == 'returnToPrimary') {
-                btn.addEventListener("click", secondaryBackClick);
-              } else {
+                if (btn.id == "btnMultiInstances") {
+                    btn.addEventListener("click", multiInstClick);
+                } else if (btn.id == 'btnRecToJson') {
+                    btnRecToJson.addEventListener('click', convtRecToJson);
+                } else if (btn.id == 'returnToPrimary') {
+                    btn.addEventListener("click", secondaryBackClick);
+                } else {
 
                     var curBtnId = btn.id;
                     btn.onclick = function () {
@@ -342,7 +342,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     /*============================= Load Module ENDS ==================================== */
 
-  
+
 
 
 
@@ -361,25 +361,25 @@ document.addEventListener('DOMContentLoaded', function () {
                     var instanceId = eachInstData.id;
                     var instUsrName = eachInstData.instanceUserName;
                     var instURL = eachInstData.url;
-                    var eachBtnStr = `<button id="btn${instanceId}" value="${instURL}" class="button hasFullValue instanceLink">${compNInst} </br> ${instUsrName}</button>`;
-                    $(eachBtnStr).insertBefore("#multInstLead");
+                    var eachBtnStr = `<button id="btn${instanceId}" class="hasFullValue instanceLink" value="${instURL}">${compNInst} </br> ${instUsrName}</button>`;
+                    $("#instancesDiv").append(eachBtnStr);
                 }
             }
         });
-        $("#secondary")[0].style.display = "none";
     }
 
     function multiInstClick() {
         $("#primary")[0].style.transform = "translateX(100vw)";
-        $("#primary")[0].style.opacity= 0;
+        $("#primary")[0].style.opacity = 0;
         $("#secondary")[0].style.transform = "translateX(100vw)";
         $("#secondary")[0].style.opacity = 1;
     }
+
     function secondaryBackClick() {
         $("#secondary")[0].style.transform = "";
-        $("#secondary")[0].style.opacity= "";
-        $("#primary")[0].style.transform= "";
-        $("#primary")[0].style.opacity= "";
+        $("#secondary")[0].style.opacity = "";
+        $("#primary")[0].style.transform = "";
+        $("#primary")[0].style.opacity = "";
     }
     /*=====================Multi Instance Loader Ends=============== */
 

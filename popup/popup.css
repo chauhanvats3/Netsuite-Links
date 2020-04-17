@@ -11,6 +11,7 @@
   --accent: #62ACE5;
   --text: #f1f1f1;
   --glow: inset 0 0 5px var(--accent);
+  --glow-dark: inset 0 0 5px var(--bg);
 }
 
 * {
@@ -19,15 +20,20 @@
 
 body {
   background: var(--bg);
-  margin: 0px; /*Reset default 10px margin on body */
-  width: 330px; 
+  margin: 0px;
+  /*Reset default 10px margin on body */
+  min-width: 240px;
+  min-height: 250px;
+  ;
 }
 
-#primary, #secondary {
-  transition: all .3s cubic-bezier(0.65, 0, 0.35, 1); /* slide transition */
+#primary,
+#secondary {
+  transition: all .3s cubic-bezier(0.65, 0, 0.35, 1);
+  /* slide transition */
 }
 
-#secondary{
+#secondary {
   position: absolute;
   top: 0;
   left: -100vw;
@@ -35,30 +41,35 @@ body {
   font-size: larger;
   opacity: 0;
 }
-  
+
+#secondaryHeader {
+  height: 45px;
+  border-bottom: 1.5px solid var(--bg-light) !important;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+#returnToPrimary{
+  color: var(--accent);
+}
+#shrtctLabel {
+  color: var(--text);
+  padding: 10px 20px;
+  margin: 0;
+  opacity: .5;
+}
+
 .instances {
   /* Hacky Solution but only way to have back stay in top, Netsuite in bottom and scroll in between */
   /* Changing back button height or Netsuite height, update this */
-  height: calc(100vh - 43px - 45px);
+  height: calc(100vh - 45px - 45px);
   overflow-y: auto;
   overflow-x: hidden;
   margin-top: 2px;
   padding: 5px;
 }
-.instance{
-  margin: 5px;
-  padding: 10px;
-  background: var(--accent);
-  border-radius: 5px;
-}
 
-.back {
-  width: 100vw;
-  text-align: left;
-  border-bottom: 1.5px solid var(--bg-light) !important;
-}
-
-.buttons{
+.buttons {
   display: grid;
   grid-template: 1fr 1fr / 1fr 1fr;
   background: var(--bg-light);
@@ -78,7 +89,28 @@ body {
   transition: box-shadow .2s ease-in-out;
 }
 
-.button:hover { box-shadow: var(--glow);}
+.button:hover {
+  box-shadow: var(--glow);
+}
+
+.instanceLink {
+  padding: 10px;
+  border-bottom: 1.5px solid var(--bg-light) !important;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  font-weight: lighter;
+  font-family: inherit;
+  font-size: initial;
+  color: var(--text);
+  width: 100%;
+  border-bottom: 1px solid var(--bg-light);
+}
+
+.instanceLink:hover {
+  box-shadow: var(--glow);
+  border-color: var(--bg);
+}
 
 .inputs {
   display: grid;
@@ -98,15 +130,22 @@ body {
   margin: auto;
 }
 
-.moduleInputGroup:hover, 
+.moduleInputGroup:hover,
 .searchInputGroup:hover {
   box-shadow: 0 0 10px var(--accent);
   width: 200%;
 }
-.searchInputGroup:hover { transform: translateX(-50%) }
-.searchInputGroupOpened { transform: translateX(-50%) }
 
-.moduleInputGroupOpened, .searchInputGroupOpened {
+.searchInputGroup:hover {
+  transform: translateX(-50%)
+}
+
+.searchInputGroupOpened {
+  transform: translateX(-50%)
+}
+
+.moduleInputGroupOpened,
+.searchInputGroupOpened {
   width: calc(200%);
 }
 
@@ -143,6 +182,10 @@ body {
   font-size: x-large;
   font-weight: lighter;
   text-align: center;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  opacity: .65;
 }
 
 ::-webkit-scrollbar {
@@ -150,7 +193,7 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
   border-radius: 10px;
 }
 

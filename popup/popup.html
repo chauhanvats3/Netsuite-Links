@@ -6,11 +6,11 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
     integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
   <link rel="stylesheet" href="popup.css">
-  <script type="text/javascript" src="thirdParty/external/jquery/jQuery.js"></script>
-  <link rel="stylesheet" href="thirdParty/jquery-ui.min.css">
-  <script type="text/javascript" src="thirdParty/jquery-ui.min.js"></script>
-  <link rel="stylesheet" href="thirdParty/jquery-ui.structure.min.css">
-  <link rel="stylesheet" href="thirdParty/jquery-ui.theme.min.css">
+  <script type="text/javascript" src="../thirdParty/external/jquery/jquery.js"></script>
+  <link rel="stylesheet" href="../thirdParty/jquery-ui.min.css">
+  <script type="text/javascript" src="../thirdParty/jquery-ui.min.js"></script>
+  <link rel="stylesheet" href="../thirdParty/jquery-ui.structure.min.css">
+  <link rel="stylesheet" href="../thirdParty/jquery-ui.theme.min.css">
   <script src="popup.js"></script>
 
 </head>
@@ -20,7 +20,7 @@
     <div id="primary">
       <div class="buttons">
         <button class="button hasNoValue" id="btnMultiInstances" value="">
-           Multi Instances
+          Multi Instances
         </button>
         <button class="button hasFullValue" id="btnSchema"
           value="https://system.na1.netsuite.com/help/helpcenter/en_US/srbrowser/Browser2016_1/script/record/account.html">
@@ -34,7 +34,8 @@
           value=".app.netsuite.com/app/help/helpcenter.nl?fid=chapter_4387172495.html">
           Record to JSON
         </button>
-      </div> <!--buttons-->
+      </div>
+      <!--buttons-->
 
       <div class="inputs">
         <div id="loadModules" class="moduleInputGroup" autocomplete="off">
@@ -51,15 +52,13 @@
     </div> <!-- primary -->
 
     <div id="secondary">
-      <button class="button back" id="returnToPrimary">Back</button>
-      <div class="instances">
-        <div class="instance">Super long multi line example</div>
-        <div class="instance">sample</div>
-        <div class="instance">sample</div>
-        <div class="instance">sample</div>
-        <div class="instance">sample</div>
-        <div class="instance">sample</div>
-        <div class="instance">sample</div>
+      <div id="secondaryHeader">
+        <button class="button" id="returnToPrimary">Back</button>
+        <p id="shrtctLabel">Shortcut > Ctrl + i</p>
+      </div>
+      <div id="instancesDiv" class="instances">
+        <button id="btnLogIn" class="hasFullValue instanceLink"
+          value="https://system.netsuite.com/pages/customerlogin.jsp">LogIn</button>
       </div>
       <!-- list here -->
     </div>

@@ -13,64 +13,28 @@ chrome.commands.onCommand.addListener(function (command) {
                 var tabUrl = currTab.url;
                 if (tabUrl.includes("app.netsuite.com")) {
                     console.log("tab includes ns url");
-
-                    chrome.tabs.insertCSS({
-                        file: "thirdParty/jquery-ui.min.css"
-                    }, function (results) {
-                        console.log(results);
-                    });
-                    chrome.tabs.insertCSS({
-                        file: "thirdParty/jquery-ui.structure.min.css"
-                    }, function (results) {
-                        console.log(results);
-                    });
-                    chrome.tabs.insertCSS({
-                        file: "thirdParty/jquery-ui.theme.min.css"
-                    }, function (results) {
-                        console.log(results);
-                    });
                     if (command === "search-suite-answers-shrtct") {
-
-                        /* ===========CSS Insertion============= */
-
-                        chrome.tabs.insertCSS({
-                            file: "shrtct_suiteAnswer.css"
-                        }, function (results) {
-                            console.log(results);
-                        });
 
                         /* ===========JavaScript Insertion============ */
                         chrome.tabs.executeScript({
-                            file: "shrtct_suiteAnswer.js"
+                            file: "shortcuts/shrtct_suiteAnswer.js"
                         }, function (results) {
                             console.log(results);
                         });
                     } else if (command === "load-module-shrtct") {
-                        /* ===========CSS Insertion============= */
-
-                        chrome.tabs.insertCSS({
-                            file: "shrtct_moduleLoad.css"
-                        }, function (results) {
-                            console.log(results);
-                        });
 
                         /* ===========JavaScript Insertion============ */
                         chrome.tabs.executeScript({
-                            file: "shrtct_moduleLoad.js"
+                            file: "shortcuts/shrtct_moduleLoad.js"
                         }, function (results) {
                             console.log(results);
                         });
 
                     }else if(command === "multi-instance-shrtct"){
-                        chrome.tabs.insertCSS({
-                            file: "shrtct_multi_instances.css"
-                        }, function (results) {
-                            console.log(results);
-                        });
-
+                
                         /* ===========JavaScript Insertion============ */
                         chrome.tabs.executeScript({
-                            file: "shrtct_multi_instances.js"
+                            file: "shortcuts/shrtct_multi_instances.js"
                         }, function (results) {
                             console.log(results);
                         });
