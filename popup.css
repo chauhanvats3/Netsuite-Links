@@ -4,6 +4,7 @@
   /* prevent horizontal scrollbar */
   overflow-x: hidden;
 }
+
 :root {
   --bg: #232931;
   --bg-light: #333941;
@@ -11,6 +12,7 @@
   --text: #f1f1f1;
   --glow: inset 0 0 5px var(--accent);
 }
+
 * {
   box-sizing: border-box;
 }
@@ -155,4 +157,5 @@ body {
 ::-webkit-scrollbar-thumb {
   border-radius: 10px;
   background: var(--accent);
+
 }
