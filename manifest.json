@@ -1,54 +1,52 @@
 {
-    "manifest_version": 2,
-    "name": "NetSuite Links",
-    "version": "2.6.2",
-    "description": "Load N/* Modules , search via Shortcut and More.",
-    "permissions": ["tabs", "https://*.app.netsuite.com/*"],
-    "browser_action": {
-        "default_popup": "popup.html",
-        "default_title": "NetSuite Links"
+  "manifest_version": 2,
+  "name": "NetSuite Links",
+  "version": "2.6.5",
+  "description": "Load N/* Modules , search via Shortcut and More.",
+  "permissions": ["tabs", "https://*.app.netsuite.com/*","storage"],
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_title": "NetSuite Links"
+  },
+  "background": {
+    "scripts": ["thirdParty/external/jquery/jQuery.js", "messagingBackbone.js", "shortcut_handler.js"],
+    "persistent": true
+  },
+  "content_scripts": [{
+    "matches": [
+      "https://*.app.netsuite.com/*"
+    ],
+    "js": ["thirdParty/external/jquery/jQuery.js","cntntScrptMultiInstance.js"]
+  }],
+  "icons": {
+    "16": "icons/NewIconStar16.png",
+    "32": "icons/NewIconStar32.png",
+    "48": "icons/NewIconStar48.png",
+    "128": "icons/NewIconStar128.png"
+  },
+  "content_security_policy": "script-src 'self' https://www.gstatic.com/; object-src 'self'",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAoGi8+m3TKvNDUgTOJMOwclfJZ2CzkGAyle6w8fzBMv05+tMcjuXsktYTKwFdHmHK39fXJvxHerctWwS0UCzrIi20KHqg+tEDlLg0qemwoQPBRZ8Ybo4JTbAZfjs1jysQa8m/FkJtmlNN6rY5NWaI7u2vCYRvEL6mWBTWPHAplxyoH9aHIVIq5139mLgITxjJPzMqlqng5pCg1aQJKVmLTRdeIC5L4kbyTNsrCYS0PtlfjsbcN5ZKLVbzpkVBfhK3cSOan4WV417xl5+YMzOqCsOTEsivPt5LfFW9QFxpnK206f7CLNrnk3EzsgSyUHm1kuKhiFzKc9Geu3WVMNWqAwIDAQAB",
+  "commands": {
+    "load-module-shrtct": {
+      "suggested_key": {
+        "default": "Ctrl+M",
+        "mac": "Command+M"
+      },
+      "description": "Load Modules via Shortcut."
     },
-    "background": {
-        "scripts": ["thirdParty/external/jquery/jQuery.js", "messagingBackbone.js","shortcut_handler.js"],
-        "persistent": true
+    "multi-instance-shrtct": {
+      "suggested_key": {
+        "default": "Ctrl+I",
+        "mac": "Command+I"
+      },
+      "description": "Load Multiple Instances"
     },
-    "icons": {
-        "16": "icons/NewIconStar16.png",
-        "32": "icons/NewIconStar32.png",
-        "48": "icons/NewIconStar48.png",
-        "128": "icons/NewIconStar128.png"
-    },
-    "content_security_policy": "script-src 'self' https://www.gstatic.com/; object-src 'self'",
-    "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAoGi8+m3TKvNDUgTOJMOwclfJZ2CzkGAyle6w8fzBMv05+tMcjuXsktYTKwFdHmHK39fXJvxHerctWwS0UCzrIi20KHqg+tEDlLg0qemwoQPBRZ8Ybo4JTbAZfjs1jysQa8m/FkJtmlNN6rY5NWaI7u2vCYRvEL6mWBTWPHAplxyoH9aHIVIq5139mLgITxjJPzMqlqng5pCg1aQJKVmLTRdeIC5L4kbyTNsrCYS0PtlfjsbcN5ZKLVbzpkVBfhK3cSOan4WV417xl5+YMzOqCsOTEsivPt5LfFW9QFxpnK206f7CLNrnk3EzsgSyUHm1kuKhiFzKc9Geu3WVMNWqAwIDAQAB",
-    "commands": {
-        "load-module-shrtct": {
-          "suggested_key": {
-            "default": "Ctrl+M",
-            "mac": "Command+M"
-          },
-          "description": "Load Modules via Shortcut."
-        },
-        "search-suite-answers-shrtct": {
-          "suggested_key": {
-            "default": "Ctrl+Shift+S",
-            "mac": "Command+Shift+S"
-          },
-          "description": "Search SuiteAnswers via Shortcut."
-        },
-        "_execute_browser_action": {
-          "suggested_key": {
-            "windows": "Ctrl+Shift+Y",
-            "mac": "Command+Shift+Y",
-            "chromeos": "Ctrl+Shift+U",
-            "linux": "Ctrl+Shift+J"
-          }
-        },
-        "_execute_page_action": {
-          "suggested_key": {
-            "default": "Ctrl+Shift+E",
-            "windows": "Alt+Shift+P",
-            "mac": "Alt+Shift+P"
-          }
-        }
-      }
+    "search-suite-answers-shrtct": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+S",
+        "mac": "Command+Shift+S"
+      },
+      "description": "Search SuiteAnswers via Shortcut."
+    }
+  }
 }

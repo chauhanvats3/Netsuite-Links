@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var whichInputBox = "";
     var moduleLoadDisabled = false;
     var btnRecToJson = document.getElementById("btnRecToJson");
-
+    setupOtherInstanceBtns();
     $(function () {
         var availableModules = [
             "N/record",
@@ -120,17 +120,21 @@ document.addEventListener('DOMContentLoaded', function () {
     /* ================================= Search Answers ENDS ============================================ */
 
 
+    /*========================All Button Logic================= */
     var getAllNetsuiteTabsQuery = {
         'url': "https://*.app.netsuite.com/*"
     };
     chrome.tabs.query(getAllNetsuiteTabsQuery, function (allNetsuiteTabs) {
         console.log("Query for all NS tabs fired");
+
         if (allNetsuiteTabs.length == 0) { //if no netsuite tab is open
             console.log("no netsuite tab open");
             disableModuleInput();
             disableRecToJSON();
 
+
         } else { //netsuite tab is open
+
 
             console.log("Netsuite tab open");
             var getCurrentTabQuery = {
@@ -169,7 +173,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 var classNameBtn = btn.className;
                 var isClassHalfValue = classNameBtn.includes("hasHalfValue");
                 var btnId = btn.id;
-                // console.log("Class = " + classNameBtn);
+                console.log("id: " + btnId + "Class = " + classNameBtn);
                 if (isClassHalfValue) {
                     var scheme, accName, location;
                     scheme = "https://";
@@ -189,9 +193,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 } else { //for those with full link
                     finalLink[btnId] = btn.value;
-                }
 
-                if (btn.id == 'btnRecToJson') {
+                }
+                if (btn.id == "btnMultiInstances") {
+                    btn.addEventListener("click", multiInstClick);
+                } else if (btn.id == 'btnRecToJson') {
                     btnRecToJson.addEventListener('click', convtRecToJson);
                 } else {
 
@@ -235,6 +241,8 @@ document.addEventListener('DOMContentLoaded', function () {
             })();
         }
     });
+    /*==============All button logic Ends=========================== */
+
 
     function doNothingOnClick() {
         console.log("Do Nothing");
@@ -255,11 +263,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
     /*============================== LOAD MODULES Function ================================ */
     inputModuleName.addEventListener('keydown', (e) => {
-        console.log("e.key" + e.key);
+        // console.log("e.key" + e.key);
         if (e.key === "Enter") {
             loadModule();
         } else if (e.key === "Tab") {
-            console.log("tab pressed");
+            //console.log("tab pressed");
             e.preventDefault();
         }
     });
@@ -315,9 +323,9 @@ document.addEventListener('DOMContentLoaded', function () {
         inputBoxValue = caller.value;
         whichInputBox = caller.id;
         if (inputBoxValue) {
-            console.log("Caller Has Value");
-            
-            
+            //console.log("Caller Has Value");
+
+
         } else {
             switch (caller.id) {
                 case "inputSearch":
@@ -326,7 +334,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     break;
                 case "moduleNameInput":
                     moduleInputGroup.classList.remove("moduleInputGroupOpened");
-                    moduleInputGroup.style.zIndex = "0";                   
+                    moduleInputGroup.style.zIndex = "0";
                     break;
             }
 
@@ -334,5 +342,36 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     /*======================================Input Listener Ends============================ */
+
+
+
+
+    /*================================Multi Instance Loader=================== */
+    function setupOtherInstanceBtns() {
+        chrome.storage.local.get("allInstancesData", function (items) {
+            // console.log("Got from memory : " + JSON.stringify(items));
+            if (jQuery.isEmptyObject(items))
+                console.log("Data enmpty");
+            else {
+                var allInstanceData = items.allInstancesData;
+                for (var eachInstKey in allInstanceData) {
+                    var eachInstData = allInstanceData[eachInstKey];
+                    var compNInst = eachInstData.company_and_instance;
+                    var instanceId = eachInstData.id;
+                    var instUsrName = eachInstData.instanceUserName;
+                    var instURL = eachInstData.url;
+                    var eachBtnStr = `<button type="button" id="btn${instanceId}" value="${instURL}" class="button hasFullValue instanceLink">${compNInst} </br> ${instUsrName}</button>`;
+                    $(eachBtnStr).insertBefore("#multInstLead");
+                }
+            }
+        });
+        $("#multiInstanceDiv")[0].style.display = "none";
+    }
+
+    function multiInstClick() {
+        $("#outerDiv")[0].style.display = "none";
+        $("#multiInstanceDiv")[0].style.display = "block";
+    }
+    /*=====================Multi Instance Loader Ends=============== */
 
 });

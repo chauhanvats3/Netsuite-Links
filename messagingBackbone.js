@@ -2,6 +2,7 @@ chrome.extension.onConnect.addListener(function (port) { //Listen to any incomin
     port.onMessage.addListener(function (msg) {
         var msgType = msg.type;
         switch (msgType) {
+
             case 'loadModule':
                 var msgRcvd = msg.codeToInject;
                 var splittedArr = msgRcvd.split(",");
@@ -40,15 +41,20 @@ chrome.extension.onConnect.addListener(function (port) { //Listen to any incomin
                     replyFromBG: "Executed load module"
                 });
                 break;
+
+
+                /*======================================================= */
             case 'recToJson':
-                   
-                    //sending this code tp page for injection
-                    chrome.tabs.executeScript({
-                        file: "recToJson.js"
-                    }, function(results){ console.log(results); } );
-                    port.postMessage({
-                        replyFromBG: "Executed Rectojson"
-                    });
+
+                //sending this code tp page for injection
+                chrome.tabs.executeScript({
+                    file: "recToJson.js"
+                }, function (results) {
+                    console.log(results);
+                });
+                port.postMessage({
+                    replyFromBG: "Executed Rectojson"
+                });
                 break;
         }
     });
