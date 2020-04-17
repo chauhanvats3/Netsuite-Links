@@ -154,6 +154,7 @@ body {
   font-family: inherit;
   font-size: x-large;
   font-weight: lighter;
+  text-align: center;
 }
 
 #multiInstanceDiv {
@@ -179,11 +180,11 @@ html {
 }
 /* Optional: show position indicator in red */
 ::-webkit-scrollbar-thumb {
-  background: var(--accent-dim);
+  background: #778899;
  
 }
 
-.instanceLink {
+.instanceLink ,#btnLogIn{
   width: 200px;
   height: 50px;
   margin: 5px;
