@@ -370,12 +370,16 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function multiInstClick() {
-        $("#primary")[0].style.display = "none";
-        $("#secondary")[0].style.display = "flex";
+        $("#primary")[0].style.transform = "translateX(100vw)";
+        $("#primary")[0].style.opacity= 0;
+        $("#secondary")[0].style.transform = "translateX(100vw)";
+        $("#secondary")[0].style.opacity = 1;
     }
     function secondaryBackClick() {
-        $("#secondary")[0].style.display = "none";
-        $("#primary")[0].style.display = "flex";
+        $("#secondary")[0].style.transform = "";
+        $("#secondary")[0].style.opacity= "";
+        $("#primary")[0].style.transform= "";
+        $("#primary")[0].style.opacity= "";
     }
     /*=====================Multi Instance Loader Ends=============== */
 

@@ -9,6 +9,7 @@
   --bg-light: #333941;
   --accent: #62ACE5;
   --text: #f1f1f1;
+  --glow: inset 0 0 5px var(--accent);
 }
 * {
   box-sizing: border-box;
@@ -16,7 +17,43 @@
 
 body {
   background: var(--bg);
-  margin: 0px;
+  margin: 0px; /*Reset default 10px margin on body */
+  width: 330px; 
+}
+
+#primary, #secondary {
+  transition: all .3s cubic-bezier(0.65, 0, 0.35, 1); /* slide transition */
+}
+
+#secondary{
+  position: absolute;
+  top: 0;
+  left: -100vw;
+  width: 100vw;
+  font-size: larger;
+  opacity: 0;
+}
+  
+.instances {
+  /* Hacky Solution but only way to have back stay in top, Netsuite in bottom and scroll in between */
+  /* Changing back button height or Netsuite height, update this */
+  height: calc(100vh - 43px - 45px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  margin-top: 2px;
+  padding: 5px;
+}
+.instance{
+  margin: 5px;
+  padding: 10px;
+  background: var(--accent);
+  border-radius: 5px;
+}
+
+.back {
+  width: 100vw;
+  text-align: left;
+  border-bottom: 1.5px solid var(--bg-light) !important;
 }
 
 .buttons{
@@ -35,11 +72,11 @@ body {
   font-weight: lighter;
   font-family: inherit;
   font-size: initial;
-  padding: 20px;
+  padding: 10px 20px;
   transition: box-shadow .2s ease-in-out;
 }
 
-.button:hover { box-shadow: inset 0 0 3px var(--accent);}
+.button:hover { box-shadow: var(--glow);}
 
 .inputs {
   display: grid;
@@ -50,7 +87,7 @@ body {
 .moduleInputGroup,
 .searchInputGroup {
   position: relative;
-  transition: all .8s;
+  transition: all .5s;
   width: 38px;
   height: 38px;
   overflow: hidden;
@@ -89,15 +126,16 @@ body {
   width: 34px;
   height: 34px;
   border-radius: 50%;
-  font-size: .8em;
+  font-size: 1em;
   color: var(--accent);
   background: var(--bg);
   transition: all 1s;
 }
 
 .lead {
-  margin-bottom: 5px;
-  margin-top: 5px;
+  border-top: 1.5px solid var(--bg-light);
+  margin: 0;
+  padding: 5px;
   color: var(--text);
   font-family: inherit;
   font-size: x-large;
@@ -105,19 +143,16 @@ body {
   text-align: center;
 }
 
-#secondary{
-  position: absolute;
-  top: 0;
-  left: -100vw;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-size: larger;
+::-webkit-scrollbar {
+  width: 6px;
 }
 
-.instanceLink{
-  width: 200px;
-  height: 50px;
-  margin: 5px;
-  padding: 5px;
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: var(--accent);
 }
