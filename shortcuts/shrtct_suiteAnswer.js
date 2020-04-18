@@ -45,14 +45,17 @@
                 function init_suiteAnswerOverlay() {
 
                     setupOverlay();
-                    if (jQuery("#moduleLoadOverlayVTS")[0] != void 0) {
-                        moduleOverlayVTSOff();
-                    }
+                  
                     searchOverlayVTSOn();
                 }
 
                 function searchOverlayVTSOn() {
-
+                    if (jQuery("#moduleLoadOverlayVTS")[0] != void 0) {
+                        moduleOverlayVTSOff();
+                    }
+                    if (jQuery("#multiInstanceOverlayVTS")[0] != void 0) {
+                        multiInstanceOverlayVTSOff();
+                    }
                     document.getElementById("searchAnswerOverlayVTS").style.display = "block";
                     inputSearchQuery.value = "";
                     inputSearchQuery.focus();

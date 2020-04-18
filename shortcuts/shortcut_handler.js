@@ -30,8 +30,8 @@ chrome.commands.onCommand.addListener(function (command) {
                             console.log(results);
                         });
 
-                    }else if(command === "multi-instance-shrtct"){
-                
+                    } else if (command === "multi-instance-shrtct") {
+
                         /* ===========JavaScript Insertion============ */
                         chrome.tabs.executeScript({
                             file: "shortcuts/shrtct_multi_instances.js"

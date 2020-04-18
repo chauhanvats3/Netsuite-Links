@@ -65,7 +65,6 @@ document.addEventListener('DOMContentLoaded', function () {
                         searchInputGroup.classList.add("searchInputGroupOpened");
                     else {
                         searchInputGroup.classList.remove("searchInputGroupOpened");
-                        eachIG.style.zIndex = "0";
                     }
                     break;
                 case "loadModules":
@@ -73,7 +72,6 @@ document.addEventListener('DOMContentLoaded', function () {
                         moduleInputGroup.classList.add("moduleInputGroupOpened");
                     else {
                         moduleInputGroup.classList.remove("moduleInputGroupOpened");
-                        eachIG.style.zIndex = "0";
                     }
                     break;
             }
@@ -136,11 +134,9 @@ document.addEventListener('DOMContentLoaded', function () {
             switch (caller.id) {
                 case "inputSearch":
                     searchInputGroup.classList.remove("searchInputGroupOpened");
-                    searchInputGroup.style.zIndex = "0";
                     break;
                 case "moduleNameInput":
                     moduleInputGroup.classList.remove("moduleInputGroupOpened");
-                    moduleInputGroup.style.zIndex = "0";
                     break;
             }
         }
@@ -358,10 +354,14 @@ document.addEventListener('DOMContentLoaded', function () {
                 for (var eachInstKey in allInstanceData) {
                     var eachInstData = allInstanceData[eachInstKey];
                     var compNInst = eachInstData.company_and_instance;
-                    var instanceId = eachInstData.id;
+                    var instanceId = eachInstData.idFull;
                     var instUsrName = eachInstData.instanceUserName;
                     var instURL = eachInstData.url;
-                    var eachBtnStr = `<button id="btn${instanceId}" class="hasFullValue instanceLink" value="${instURL}">${compNInst} </br> ${instUsrName}</button>`;
+                    var instType = eachInstData.instanceType;
+                    //console.log("Data Read : " + JSON.stringify(eachInstData));
+                    if (instType !== "" || instType !== undefined || instType !== null)
+                        instType = " | " + instType.toUpperCase();
+                    var eachBtnStr = `<button id="btn${instanceId}" class="hasFullValue instanceLink" value="${instURL}">${compNInst}${instType} </br> ${instUsrName}</button>`;
                     $("#instancesDiv").append(eachBtnStr);
                 }
             }

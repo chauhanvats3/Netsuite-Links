@@ -35,13 +35,5 @@
   caret-color: var(--accent);
 }
 
-.ui-autocomplete {
-  max-height: 40%;
-  overflow-y: hidden;
-  /* prevent horizontal scrollbar */
-  overflow-x: hidden;
-}
-
-
 
 

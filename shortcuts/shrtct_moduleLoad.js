@@ -70,9 +70,7 @@
   function init_moduleLoadShrtct() {
   
       setupOverlay();
-      if (jQuery("#searchAnswerOverlayVTS")[0] != void 0) {
-        searchOverlayVTSOff();
-    }
+     
       moduleOverlayVTSOn();
   
   
@@ -104,7 +102,12 @@
   }
   
   function moduleOverlayVTSOn() {
-  
+    if (jQuery("#searchAnswerOverlayVTS")[0] != void 0) {
+        searchOverlayVTSOff();
+    }
+    if (jQuery("#multiInstanceOverlayVTS")[0] != void 0) {
+        multiInstanceOverlayVTSOff();
+    }
       document.getElementById("moduleLoadOverlayVTS").style.display = "block";
       inputModuleName.value = "";
       inputModuleName.focus();
