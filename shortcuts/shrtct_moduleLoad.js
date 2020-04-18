@@ -41,7 +41,7 @@
   
       if (jQuery("#moduleLoadOverlayVTS")[0] == void 0) {
   
-          jQuery("<div id='moduleLoadOverlayVTS' class='moduleInputGroup'><input id='moduleLoadOverlayVTSInput' placeholder='Load Modules...' class='moduleInputText'></div>").appendTo("body");
+          jQuery("<div id='moduleLoadOverlayVTS' class='moduleInputGroup shortcutOverlayMain'><input id='moduleLoadOverlayVTSInput' placeholder='Load Modules...' class='moduleInputText shortcutOverlayInputBox'></div>").appendTo("body");
 
   
           jQuery("#moduleLoadOverlayVTS").click(function (e) {

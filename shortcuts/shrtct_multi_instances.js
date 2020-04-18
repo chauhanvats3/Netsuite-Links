@@ -37,7 +37,7 @@ function setupOverlay() {
         }
         deepFreeze(multiInstanceDataObject);
 
-        jQuery("<div id='multiInstanceOverlayVTS' class='moduleInputGroup'><input id='multiInstanceOverlayVTSInput' placeholder='Select Instance' class='moduleInputText'></div>").appendTo("body");
+        jQuery("<div id='multiInstanceOverlayVTS' class='moduleInputGroup shortcutOverlayMain'><input id='multiInstanceOverlayVTSInput' placeholder='Select Instance' class='moduleInputText shortcutOverlayInputBox'></div>").appendTo("body");
 
 
         jQuery("#multiInstanceOverlayVTS").click(function (e) {

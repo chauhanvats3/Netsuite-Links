@@ -17,7 +17,7 @@
       "https://*.app.netsuite.com/*"
     ],
     "js": ["thirdParty/external/jquery/jQuery.js", "thirdParty/jquery-ui.min.js", "myScripts/contentScrptMultiInstance.js"],
-    "css": ["thirdParty/jquery-ui.structure.min.css", "thirdParty/jquery-ui.min.css", "thirdParty/jquery-ui.theme.min.css", "shortcuts/shrtct_moduleLoad.css", "shortcuts/shrtct_suiteAnswer.css", "shortcuts/shrtct_multi_instances.css","shortcuts/overlayAutoComplete.css"]
+    "css": ["thirdParty/jquery-ui.structure.min.css", "thirdParty/jquery-ui.min.css", "thirdParty/jquery-ui.theme.min.css","shortcuts/overlays.css"]
   }],
   "icons": {
     "16": "icons/NewIconStar16.png",

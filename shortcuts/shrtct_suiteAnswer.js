@@ -17,7 +17,7 @@
                 function setupOverlay() {
                     if (jQuery("#searchAnswerOverlayVTS")[0] == void 0) {
 
-                        jQuery("<div id='searchAnswerOverlayVTS' class='searchInputGroup'><input id='searchAnswerOverlayVTSInput' placeholder='Search SuiteAnswers' class='searchInputText'></div>").appendTo("body");
+                        jQuery("<div id='searchAnswerOverlayVTS' class='searchInputGroup shortcutOverlayMain'><input id='searchAnswerOverlayVTSInput' placeholder='Search SuiteAnswers' class='searchInputText shortcutOverlayInputBox'></div>").appendTo("body");
 
                         jQuery("#searchAnswerOverlayVTS").click(function (e) {
                             //console.log("Outside Input box clicked");
