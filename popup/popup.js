@@ -6,11 +6,12 @@ document.addEventListener('DOMContentLoaded', function () {
     var inputModuleName = document.getElementById("moduleNameInput");
     var btnLoadModule = document.getElementById("btnLoadModule");
     var inputGroups = document.getElementsByClassName("inputGroup");
-    var defaultAccName = 'tstdrv2152924';
     var searchInputGroup = document.getElementById("searchForm");
     var moduleInputGroup = document.getElementById("loadModules");
     var inputBoxValue = "";
     var whichInputBox = "";
+    var whichInputGroup="";
+    var defaultAccName = 'tstdrv1234567';
     var moduleLoadDisabled = false;
     var btnRecToJson = document.getElementById("btnRecToJson");
     setupOtherInstanceBtns();
@@ -39,7 +40,12 @@ document.addEventListener('DOMContentLoaded', function () {
         ];
         $("#moduleNameInput").autocomplete({
             source: availableModules,
-            minLength: 1
+            minLength: 1,
+            position: {
+                "my": "bottom",
+                "at": "top",
+                "of": $("#moduleNameInput")
+            }
         });
     });
 
@@ -59,19 +65,22 @@ document.addEventListener('DOMContentLoaded', function () {
     inputGroups = [searchInputGroup, moduleInputGroup];
     inputGroups.forEach(eachIG => {
         eachIG.addEventListener("mouseleave", e => {
+            console.log("which box : " + whichInputGroup);
+            console.log("Value : " + inputBoxValue);
             switch (eachIG.id) {
                 case "searchForm":
-                    if (inputBoxValue && whichInputBox == "inputSearch")
+                    if (inputBoxValue && whichInputGroup == "searchForm")
                         searchInputGroup.classList.add("searchInputGroupOpened");
                     else {
                         searchInputGroup.classList.remove("searchInputGroupOpened");
                     }
                     break;
                 case "loadModules":
-                    if (inputBoxValue && whichInputBox == 'moduleNameInput')
+                    if (inputBoxValue && whichInputGroup == 'loadModules')
                         moduleInputGroup.classList.add("moduleInputGroupOpened");
                     else {
                         moduleInputGroup.classList.remove("moduleInputGroupOpened");
+                        $("#moduleNameInput").autocomplete("close");
                     }
                     break;
             }
@@ -81,12 +90,24 @@ document.addEventListener('DOMContentLoaded', function () {
 
         });
         eachIG.addEventListener("mouseenter", e => {
+            var caller = e.target || e.srcElement;
             eachIG.style.zIndex = "1";
-            if (eachIG == searchInputGroup)
+
+            whichInputGroup = caller.id;
+            if (whichInputGroup == searchInputGroup.id) {
+                moduleInputGroup.style.zIndex = 0;
                 inputModuleName.value = "";
-            if (eachIG == moduleInputGroup)
+                if (inputSearch.value === "")
+                    inputBoxValue = "";
+            }
+            if (whichInputGroup == moduleInputGroup.id) {
+                searchInputGroup.style.zIndex = 0;
                 inputSearch.value = "";
-            inputBoxValue = "";
+                if (inputModuleName.value === "")
+                    inputBoxValue = "";
+            }
+            console.log("Enter which box : " + whichInputGroup);
+            console.log("Value : " + inputBoxValue);
         });
     });
     /**================================== Animation Fix ENDS =============================================== */
@@ -125,18 +146,32 @@ document.addEventListener('DOMContentLoaded', function () {
     function inputChanged(e) {
         var caller = e.target || e.srcElement;
         inputBoxValue = caller.value;
+        console.log("inpBxVal : "+inputBoxValue);
         whichInputBox = caller.id;
+        var isOpened = caller.parentElement.classList.value.toLowerCase().includes("opened");
         if (inputBoxValue) {
-            //console.log("Caller Has Value");
-
+            console.log("Caller Has Value");
+            switch (caller.parentElement.id) {
+                case "searchForm":
+                    searchInputGroup.classList.add("searchInputGroupOpened");
+                    moduleInputGroup.style.zIndex = 0;
+                    searchInputGroup.style.zIndex = 1;
+                    break;
+                case "loadModules":
+                    moduleInputGroup.classList.add("moduleInputGroupOpened");
+                    searchInputGroup.style.zIndex = 0;
+                    moduleInputGroup.style.zIndex = 1;
+                    break;
+            }
 
         } else {
-            switch (caller.id) {
-                case "inputSearch":
+            switch (caller.parentElement.id) {
+                case "searchForm":
                     searchInputGroup.classList.remove("searchInputGroupOpened");
                     break;
-                case "moduleNameInput":
+                case "loadModules":
                     moduleInputGroup.classList.remove("moduleInputGroupOpened");
+                    $("#moduleNameInput").autocomplete("close");
                     break;
             }
         }
@@ -148,10 +183,10 @@ document.addEventListener('DOMContentLoaded', function () {
         'url': "https://*.app.netsuite.com/*"
     };
     chrome.tabs.query(getAllNetsuiteTabsQuery, function (allNetsuiteTabs) {
-        console.log("Query for all NS tabs fired");
+        // console.log("Query for all NS tabs fired");
 
         if (allNetsuiteTabs.length == 0) { //if no netsuite tab is open
-            console.log("no netsuite tab open");
+            // console.log("no netsuite tab open");
             disableModuleInput();
             disableRecToJSON();
 
@@ -159,29 +194,28 @@ document.addEventListener('DOMContentLoaded', function () {
         } else { //netsuite tab is open
 
 
-            console.log("Netsuite tab open");
+            // console.log("Netsuite tab open");
             var getCurrentTabQuery = {
                 currentWindow: true,
                 active: true
             };
             chrome.tabs.query(getCurrentTabQuery, function (currentWindowTabs) {
-                console.log("Active tab query fired");
+                // console.log("Active tab query fired");
                 if (currentWindowTabs.length != 0) { //current window is present
-                    console.log("Current tabis present");
-                    // console.log(tabs[0]);
+                    //console.log("Current tabis present");
                     var currTab = currentWindowTabs[0];
                     var tabUrl = currTab.url;
                     if (tabUrl.includes("app.netsuite.com")) {
-                        console.log("tab includes ns url");
+                        //console.log("tab includes ns url");
                         inputModuleName.style.display = "block";
                         inputModuleName.placeholder = "LoadModule > Ctrl + M";
                     } else {
-                        console.log("tab doesnt include ns url");
+                        //console.log("tab doesnt include ns url");
                         disableModuleInput();
                         disableRecToJSON();
                     }
                 } else {
-                    console.log("No current window present");
+                    //console.log("No current window present");
                     disableModuleInput();
                     disableRecToJSON();
                 }
@@ -196,7 +230,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 var classNameBtn = btn.className;
                 var isClassHalfValue = classNameBtn.includes("hasHalfValue");
                 var btnId = btn.id;
-                console.log("id: " + btnId + "Class = " + classNameBtn);
+                //console.log("id: " + btnId + "Class = " + classNameBtn);
                 if (isClassHalfValue) {
                     var scheme, accName, location;
                     scheme = "https://";
@@ -281,7 +315,7 @@ document.addEventListener('DOMContentLoaded', function () {
             type: 'recToJson'
         });
         port.onMessage.addListener(function (msg) { //Get a feedBack from Background script
-            console.log("message recieved from bg" + msg.replyFromBG);
+            // console.log("message recieved from bg" + msg.replyFromBG);
         });
     }
 
@@ -301,11 +335,11 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function loadModule() {
-        console.log("Module load disable = ");
+        //console.log("Module load disable = ");
         var moduleName = inputModuleName.value.trim();
         if (moduleName != "" || moduleName != void 0 || moduleName != null) {
             if (moduleName.startsWith("N/") || moduleName.startsWith("SuiteScripts/")) {
-                console.log("Module Name : " + moduleName);
+                //console.log("Module Name : " + moduleName);
                 var tempModuleName = "";
                 if (moduleName.endsWith(".js")) {
                     tempModuleName = moduleName.substring(0, moduleName.length - 3);
@@ -325,7 +359,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     type: 'loadModule'
                 });
                 port.onMessage.addListener(function (msg) { //Get a feedBack from Background script
-                    console.log("message recieved from bg" + msg.replyFromBG);
+                    // console.log("message recieved from bg" + msg.replyFromBG);
                 });
             } else {
                 var conReply = confirm("Supported modules are 'N/*' or 'SuiteScripts/*' only");
@@ -348,7 +382,8 @@ document.addEventListener('DOMContentLoaded', function () {
         chrome.storage.local.get("allInstancesData", function (items) {
             // console.log("Got from memory : " + JSON.stringify(items));
             if (jQuery.isEmptyObject(items))
-                console.log("Data enmpty");
+                // console.log("Data enmpty");
+            ;
             else {
                 var allInstanceData = items.allInstancesData;
                 for (var eachInstKey in allInstanceData) {

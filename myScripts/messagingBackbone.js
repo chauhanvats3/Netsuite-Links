@@ -48,7 +48,7 @@ chrome.extension.onConnect.addListener(function (port) { //Listen to any incomin
 
                 //sending this code tp page for injection
                 chrome.tabs.executeScript({
-                    file: "recToJson.js"
+                    file: "myScripts/recToJson.js"
                 }, function (results) {
                     console.log(results);
                 });
