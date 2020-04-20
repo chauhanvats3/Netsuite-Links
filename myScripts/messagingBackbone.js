@@ -18,7 +18,7 @@ chrome.extension.onConnect.addListener(function (port) { //Listen to any incomin
                             alert(error.message);
                         var extra = !col ? "" : "\\\\ncolumn: " + col;
                         extra += !error ? "" : "\\\\nerror: " + error;
-                        console.log("Error: " + msg + "\\\\nURL: " + url + "\\\\n Line: " + line + "\\\\nExtra: " + extra);
+                        console.error("Error: " + msg + "\\\\nURL: " + url + "\\\\n Line: " + line + "\\\\nExtra: " + extra);
                         var suppressErrorAlert = true;
                         return suppressErrorAlert;
                     };
@@ -50,7 +50,7 @@ chrome.extension.onConnect.addListener(function (port) { //Listen to any incomin
                 chrome.tabs.executeScript({
                     file: "myScripts/recToJson.js"
                 }, function (results) {
-                    console.log(results);
+                   // console.log(results);
                 });
                 port.postMessage({
                     replyFromBG: "Executed Rectojson"

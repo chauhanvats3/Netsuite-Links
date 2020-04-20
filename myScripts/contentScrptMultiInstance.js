@@ -63,7 +63,7 @@ function saveThisInstanceData(allInstancesData, instanceIdFull) {
     else
         instType = instType[1];
 
-    console.log("Inst Type Wrote: " + instType);
+    //console.log("Inst Type Wrote: " + instType);
     allInstancesData[instanceIdFull] = {};
     allInstancesData[instanceIdFull] = {
         idFull: instanceIdFull,

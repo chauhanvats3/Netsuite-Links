@@ -41,7 +41,7 @@
   
       if (jQuery("#moduleLoadOverlayVTS")[0] == void 0) {
   
-          jQuery("<div id='moduleLoadOverlayVTS' class='moduleInputGroup shortcutOverlayMain'><input id='moduleLoadOverlayVTSInput' placeholder='Load Modules...' class='moduleInputText shortcutOverlayInputBox'></div>").appendTo("body");
+          jQuery("<div id='moduleLoadOverlayVTS' class='moduleInputGroup shortcutOverlayMain'><input id='moduleLoadOverlayVTSInput' placeholder='Load Modules...' class='moduleInputText shortcutOverlayInputBox' spellcheck='false'></div>").appendTo("body");
 
   
           jQuery("#moduleLoadOverlayVTS").click(function (e) {
@@ -93,7 +93,7 @@
               alert(error.message);
               var extra = !col ? "" : "\\ncolumn: " + col;
               extra += !error ? "" : "\\nerror: " + error;
-              console.log("Error: " + msg + "\\nurl: " + url + "\\n line: " + line + extra);
+              console.error("Error: " + msg + "\\nurl: " + url + "\\n line: " + line + extra);
           }
           var suppressErrorAlert = true;
           return suppressErrorAlert;

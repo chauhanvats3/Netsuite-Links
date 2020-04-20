@@ -37,7 +37,7 @@ function setupOverlay() {
         }
         deepFreeze(multiInstanceDataObject);
 
-        jQuery("<div id='multiInstanceOverlayVTS' class='moduleInputGroup shortcutOverlayMain'><input id='multiInstanceOverlayVTSInput' placeholder='Select Instance' class='moduleInputText shortcutOverlayInputBox'></div>").appendTo("body");
+        jQuery("<div id='multiInstanceOverlayVTS' class='moduleInputGroup shortcutOverlayMain'><input id='multiInstanceOverlayVTSInput' placeholder='Select Instance' class='moduleInputText shortcutOverlayInputBox' spellcheck='false'></div>").appendTo("body");
 
 
         jQuery("#multiInstanceOverlayVTS").click(function (e) {
@@ -89,7 +89,7 @@ function init_multiInstanceShrtct() {
                 alert(error.message);
             var extra = !col ? "" : "\\ncolumn: " + col;
             extra += !error ? "" : "\\nerror: " + error;
-            console.log("Error: " + msg + "\\nurl: " + url + "\\n line: " + line + extra);
+            console.error("Error: " + msg + "\\nurl: " + url + "\\n line: " + line + extra);
         }
         var suppressErrorAlert = true;
         return suppressErrorAlert;
