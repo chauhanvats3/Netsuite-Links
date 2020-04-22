@@ -1,16 +1,9 @@
-var date = new Date();
-var time = "" + date.getMinutes() + " : " + date.getSeconds();
-console.log("contentScriptMultiInstance Running => "+time);
 var childScr1 = document.createElement('script');
 childScr1.src = "https://code.jquery.com/jquery-3.5.0.min.js";
 
 var childScr2 = document.createElement('script');
 childScr2.src = "https://code.jquery.com/ui/1.12.1/jquery-ui.min.js";
 document.querySelector('body').appendChild(childScr1);
-
-var noConflictScr = document.createElement('script');
-noConflictScr.innerHTML = "var jjj = jQuery.noConflict();";
-document.querySelector('body').appendChild(noConflictScr);
 
 $(document).ready(function ($) {
 
