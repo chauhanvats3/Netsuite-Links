@@ -1,3 +1,22 @@
+var date = new Date();
+var time = "" + date.getMinutes() + " : " + date.getSeconds();
+console.log("Mesaging backbone running => "+time);
+
+//Define a string to tell chrome api to inject a piece of code
+/* var codeBGtoPage = `(function() {
+    //Overriding window.onError
+    var codeToExecute = \` var jj = jQuery.noConflict(); \`;
+    //creating a <script> tag to insert script
+    ;var script = document.createElement('script'); //So ,we had to do all this charade because sending require directly wouldn't work
+    script.textContent = codeToExecute;
+    document.body.appendChild(script);
+    })();`;
+
+//sending this code tp page for injection
+chrome.tabs.executeScript({
+    code: codeBGtoPage
+}); */
+
 chrome.extension.onConnect.addListener(function (port) { //Listen to any incoming messages
     port.onMessage.addListener(function (msg) {
         var msgType = msg.type;

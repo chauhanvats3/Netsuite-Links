@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "NetSuite Links",
-  "version": "3.0.3",
+  "version": "3.0.4",
   "description": "Load N/* Modules , search via Shortcut and More.",
   "permissions": ["tabs", "https://*.app.netsuite.com/*", "storage"],
   "browser_action": {
@@ -9,7 +9,7 @@
     "default_title": "NetSuite Links"
   },
   "background": {
-    "scripts": ["thirdParty/external/jquery/jQuery.js", "myScripts/messagingBackbone.js", "shortcuts/shortcut_handler.js"],
+    "scripts": ["myScripts/messagingBackbone.js", "shortcuts/shortcut_handler.js"],
     "persistent": true
   },
   "content_scripts": [{
