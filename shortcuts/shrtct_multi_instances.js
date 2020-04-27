@@ -71,7 +71,7 @@ function init_multiInstanceShrtct() {
 
 
     setTimeout(function () {
-        $("#multiInstanceOverlayVTSInput").autocomplete({
+        jQuery("#multiInstanceOverlayVTSInput").autocomplete({
             source: multiInstanceDataObject.availableInstancesArr,
             minLength: 0
         });
@@ -80,7 +80,7 @@ function init_multiInstanceShrtct() {
 
 
     window.onerror = function (msg, url, line, col, error) {
-        if (error.message == '$(...).autocomplete is not a function' || error.message.indexOf("Mismatched anonymous define() module:") != -1)
+        if (error.message.includes('autocomplete') || error.message.indexOf("Mismatched anonymous define() module:") != -1)
             loadTwoTimes = true;
         else {
             if (error.message.trim() == "require is not defined")

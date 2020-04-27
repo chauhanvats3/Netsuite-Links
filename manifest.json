@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "NetSuite Links",
-  "version": "3.0.6",
+  "version": "3.0.9",
   "description": "Load N/* Modules , search via Shortcut and More.",
   "permissions": ["tabs", "*://*.app.netsuite.com/*", "storage"],
   "browser_action": {
@@ -16,6 +16,7 @@
     "matches": [
       "*://*.app.netsuite.com/*"
     ],
+    "run_at": "document_start",
     "exclude_globs":["*://*.app.netsuite.com/*reportrunner.nl*"],
     "js": ["thirdParty/external/jquery/jQuery.js", "thirdParty/jquery-ui.min.js", "myScripts/contentScrptMultiInstance.js"],
     "css": ["thirdParty/jquery-ui.structure.min.css", "thirdParty/jquery-ui.min.css", "thirdParty/jquery-ui.theme.min.css","shortcuts/overlays.css"]

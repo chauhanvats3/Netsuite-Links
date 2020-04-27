@@ -321,6 +321,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                             });
 
+                            window.close();
                         };
                     }
                 })();
@@ -431,7 +432,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     defaultAccName = instanceId;
                 }
             }
-            console.log("Acc : "+defaultAccName);
+            console.log("Acc : " + defaultAccName);
             setButtonsLogic();
         });
         console.log("setupOtherInstanceBtns ends");

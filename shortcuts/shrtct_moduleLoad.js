@@ -75,7 +75,7 @@
   
   
       setTimeout(function () {
-          $("#moduleLoadOverlayVTSInput").autocomplete({
+          jQuery("#moduleLoadOverlayVTSInput").autocomplete({
               source: availableModules,
               minLength: 0
           });
