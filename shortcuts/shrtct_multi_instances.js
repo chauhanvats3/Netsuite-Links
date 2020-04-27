@@ -120,6 +120,7 @@ function loadInstance() {
         if(multiInstanceDataObject.availableInstancesData.hasOwnProperty(selectedInstance)){
             var urlToOpen = multiInstanceDataObject.availableInstancesData[selectedInstance];
             window.open(urlToOpen, '_blank');
+            multiInstanceOverlayVTSOff();
         }else{
             inputInstanceName.value = "";
             inputInstanceName.placeholder = "Please Select From The List!";

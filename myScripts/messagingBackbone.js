@@ -1,3 +1,11 @@
+chrome.runtime.onUpdateAvailable.addListener(function (details) {
+    var res = consirm("Update NetSuite Links to version : " + details.version);
+    if (res)
+        chrome.runtime.reload();
+});
+
+
+
 chrome.extension.onConnect.addListener(function (port) { //Listen to any incoming messages
     port.onMessage.addListener(function (msg) {
         var msgType = msg.type;
@@ -50,7 +58,7 @@ chrome.extension.onConnect.addListener(function (port) { //Listen to any incomin
                 chrome.tabs.executeScript({
                     file: "myScripts/recToJson.js"
                 }, function (results) {
-                   // console.log(results);
+                    // console.log(results);
                 });
                 port.postMessage({
                     replyFromBG: "Executed Rectojson"

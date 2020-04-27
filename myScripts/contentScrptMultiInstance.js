@@ -3,10 +3,15 @@ childScr1.src = "https://code.jquery.com/jquery-3.5.0.min.js";
 
 var childScr2 = document.createElement('script');
 childScr2.src = "https://code.jquery.com/ui/1.12.1/jquery-ui.min.js";
-document.querySelector('body').appendChild(childScr1);
+
+$(document).ready(function() {
+    // document is loaded and DOM is ready
+    document.querySelector('body').appendChild(childScr1);
+});
 
 $(document).ready(function ($) {
 
+   // $(window).on('focusin', function() { alert("Focused!"); });
 
     document.querySelector('body').appendChild(childScr2);
 

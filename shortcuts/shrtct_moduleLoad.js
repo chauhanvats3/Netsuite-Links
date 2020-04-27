@@ -136,11 +136,13 @@
               require([moduleName], function () {
                   window[moduleVariableName] = require(moduleName);
   
-                  moduleOverlayVTSOff();
+                  //moduleOverlayVTSOff();
   
-                  setTimeout(function () {
+                 /*  setTimeout(function () {
                       alert("Loaded : " + moduleName + "\\nVariable Name : " + moduleVariableName + "\\nUse In Console!");
-                  }, 500);
+                  }, 500); */
+                  inputModuleName.value = "";
+                  inputModuleName.placeholder = "Loaded : " + moduleName + " | " + moduleVariableName;
                   console.log("Module Loaded : " + moduleName + "\\nVariable Name : " + moduleVariableName);
               });
   
