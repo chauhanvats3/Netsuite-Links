@@ -34,6 +34,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 "N/format",
                 "N/format/i18n",
                 "N/http",
+                "N/https",
                 "N/log",
                 "N/portlet",
                 "N/query",

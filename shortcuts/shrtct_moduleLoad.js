@@ -24,6 +24,7 @@
       "N/format",
       "N/format/i18n",
       "N/http",
+      "N/https",
       "N/log",
       "N/portlet",
       "N/query",
@@ -110,8 +111,8 @@
     }
       document.getElementById("moduleLoadOverlayVTS").style.display = "block";
       inputModuleName.value = "";
+      inputModuleName.placeholder='Load Modules...';
       inputModuleName.focus();
-  
   }
   
   function moduleOverlayVTSOff() {

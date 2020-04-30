@@ -106,6 +106,7 @@ function multiInstanceOverlayVTSOn() {
     }
     document.getElementById("multiInstanceOverlayVTS").style.display = "block";
     inputInstanceName.value = "";
+    inputInstanceName.placeholder='Select Instance';
     inputInstanceName.focus();
 
 }
