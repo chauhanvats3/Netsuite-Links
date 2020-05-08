@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var searchInputGroup = document.getElementById("searchForm");
     var moduleInputGroup = document.getElementById("loadModules");
     var btnRecToJson = document.getElementById("btnRecToJson");
+    var helpTextSpan = document.getElementById("helpText");
 
     var inputBoxValue = "";
     var whichInputBox = "";
@@ -100,24 +101,31 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (!inputBoxValue)
                     eachIG.style.zIndex = "0";
 
+                helpTextSpan.style.visibility = 'hidden';
             });
             eachIG.addEventListener("mouseenter", e => {
+                var helpText;
                 var caller = e.target || e.srcElement;
                 eachIG.style.zIndex = "1";
 
                 whichInputGroup = caller.id;
                 if (whichInputGroup == searchInputGroup.id) {
+                    helpText = "Search On SuiteAnwers directly from here.\n| Shortcut > Ctrl + Shift + s|";
                     moduleInputGroup.style.zIndex = 0;
                     inputModuleName.value = "";
                     if (inputSearch.value === "")
                         inputBoxValue = "";
                 }
                 if (whichInputGroup == moduleInputGroup.id) {
+                    helpText = "Load client-side modules to be used in the console of browser.\n| Shortcut > Ctrl + m |";
                     searchInputGroup.style.zIndex = 0;
                     inputSearch.value = "";
                     if (inputModuleName.value === "")
                         inputBoxValue = "";
                 }
+                helpTextSpan.innerText = helpText;
+                helpTextSpan.style.visibility = 'visible';
+
                 // console.log("Enter which box : " + whichInputGroup);
                 //console.log("Value : " + inputBoxValue);
             });

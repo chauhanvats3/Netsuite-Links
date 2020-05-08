@@ -7,7 +7,7 @@
 
 :root {
   --bg: #232931;
-  --bg-light: #333941;
+  --bg-light: #434750;
   --accent: #62ACE5;
   --text: #f1f1f1;
   --glow: inset 0 0 5px var(--accent);
@@ -157,6 +157,35 @@ body {
   padding-left: 15px;
   padding-right: 40px;
   font-size: 1em;
+}
+
+.helpText {
+  visibility: hidden;
+  width: 200px;
+  background-color: var(--bg-light);
+  color: var(--text);
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+ 
+  /* Position the tooltip text - see examples below! */
+  position: absolute;
+  z-index: 1;
+  bottom: 45%;
+  left: 50%;
+  margin-left: -100px; /* Use half of the width (120/2 = 60), to center the tooltip */
+
+}
+
+.helpText::after {
+  content: " ";
+  position: absolute;
+  top: 100%; /* At the bottom of the tooltip */
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: var(--bg-light) transparent transparent transparent;
 }
 
 .fa {

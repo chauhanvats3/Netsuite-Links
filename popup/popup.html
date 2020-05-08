@@ -19,24 +19,28 @@
   <div class="scroll-wrapper">
     <div id="primary">
       <div class="buttons">
-        <button class="button hasNoValue" id="btnMultiInstances" value="">
+        <button class="button hasNoValue" id="btnMultiInstances" value=""
+          title="LogIn to multiple instances without logging out of any other. You must first logIn to an instance for it to appear in the menu | Shortcut > Ctrl + i |">
           Multi Instances
         </button>
         <button class="button hasFullValue" id="btnSchema"
-          value="https://system.na1.netsuite.com/help/helpcenter/en_US/srbrowser/Browser2016_1/script/record/account.html">
+          value="https://system.na1.netsuite.com/help/helpcenter/en_US/srbrowser/Browser2016_1/script/record/account.html"
+          title="Open the Records Browser helpcenter page.">
           Records Browser
         </button>
         <button class="button hasHalfValue" id="btnModules"
-          value=".app.netsuite.com/app/help/helpcenter.nl?fid=chapter_4220488571.html">
+          value=".app.netsuite.com/app/help/helpcenter.nl?fid=chapter_4220488571.html"
+          title="Opens the SuiteScript 2.0 Modules helpcenter page for current instance.">
           SS2 Modules
         </button>
         <button class="button" id="btnRecToJson"
-          value=".app.netsuite.com/app/help/helpcenter.nl?fid=chapter_4387172495.html">
+          value=".app.netsuite.com/app/help/helpcenter.nl?fid=chapter_4387172495.html"
+          title="Opens the current record's entire data as JSON. Works only on saved record pages.">
           Record to JSON
         </button>
+        <span id="helpText" class="helpText"></span>
       </div>
       <!--buttons-->
-
       <div class="inputs">
         <div id="loadModules" class="moduleInputGroup" autocomplete="off">
           <input id="moduleNameInput" class="inputText" placeholder="Disabled Here">
@@ -49,6 +53,7 @@
           <i id="btnSearch" class="fa fa-search"></i>
         </div>
       </div> <!-- inputs -->
+
     </div> <!-- primary -->
 
     <div id="secondary">
