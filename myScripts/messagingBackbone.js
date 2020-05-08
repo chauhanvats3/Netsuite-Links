@@ -1,5 +1,5 @@
 chrome.runtime.onUpdateAvailable.addListener(function (details) {
-    var res = consirm("Update NetSuite Links to version : " + details.version);
+    var res = confirm("Update NetSuite Links to version : " + details.version);
     if (res)
         chrome.runtime.reload();
 });
