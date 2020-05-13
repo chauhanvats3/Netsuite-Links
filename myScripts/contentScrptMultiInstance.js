@@ -1,61 +1,22 @@
-var childScr1 = document.createElement('script');
-childScr1.src = "https://code.jquery.com/jquery-3.5.0.min.js";
-
-var childScr2 = document.createElement('script');
-childScr2.src = "https://code.jquery.com/ui/1.12.1/jquery-ui.min.js";
-
-
-    // document is loaded and DOM is ready
-document.querySelector('html').appendChild(childScr1);
-
-
-$(document).ready(function ($) {
-
-   // $(window).on('focusin', function() { alert("Focused!"); });
-
-    document.querySelector('html').appendChild(childScr2);
-
-    var deepFreezeScript = document.createElement('script');
-    deepFreezeScript.innerHTML = `
-    const deepFreeze = o => {
-        for (let [key, value] of Object.entries(o)) {
-            if (o.hasOwnProperty(key) && typeof value == "object") {
-                deepFreeze(value);
-            }
+if (document.readyState === 'ready' || document.readyState === 'complete') {
+    sendShortcutReadyMessage();
+} else {
+    document.onreadystatechange = function () {
+        if (document.readyState == "complete") {
+            pageFullyLoaded();
         }
-        Object.freeze(o);
-        return o;
-    };`;
-    deepFreezeScript.id = "deepFreezeScript";
-    document.querySelector('body').appendChild(deepFreezeScript);
+    };
+}
 
-    var pageURL = $(location)[0].href;
-    if (pageURL.includes(".app.netsuite.com")) {
-        var instanceId = pageURL.split(".app.")[0].split("://")[1];
+function sendShortcutReadyMessage() {
+    chrome.runtime.sendMessage({
+        text: "shortcuts-ready"
+    }, function (response) {
+        console.log("Response: ", response);
+    });
+}
 
-        chrome.storage.local.get("allInstancesData", function (items) {
-            //console.log("Got from memory : " + JSON.stringify(items));
-            if (jQuery.isEmptyObject(items))
-                saveThisInstanceData(items, instanceId);
-            else {
-                if (!items.allInstancesData.hasOwnProperty(instanceId))
-                    saveThisInstanceData(items.allInstancesData, instanceId);
-                else
-                    // console.log("This account data already exists");
-                ;
-            }
-            var allInstancesDataToDump = JSON.stringify(items.allInstancesData);
-            var instanceDataDumpScript = document.createElement("script");
-            instanceDataDumpScript.innerHTML = `
-            const multiInstanceDataObject = {};
-            window['tempAllInstancesData'] = JSON.parse('${allInstancesDataToDump}');  
-            deepFreeze(tempAllInstancesData);
-              const allInstancesData=tempAllInstancesData;`;
-            document.querySelector('body').appendChild(instanceDataDumpScript);
 
-        });
-    }
-});
 
 function saveThisInstanceData(allInstancesData, instanceIdFull) {
     var companyNinstance = jQuery(".ns-role-company")[0].innerHTML;
@@ -82,4 +43,49 @@ function saveThisInstanceData(allInstancesData, instanceIdFull) {
     }, function () {
         //console.log("Saved To Memory : " + JSON.stringify(allInstancesData));
     });
+}
+
+function pageFullyLoaded() {
+
+    var deepFreezeScript = document.createElement('script');
+    deepFreezeScript.innerHTML = `
+        const deepFreeze = o => {
+            for (let [key, value] of Object.entries(o)) {
+                if (o.hasOwnProperty(key) && typeof value == "object") {
+                    deepFreeze(value);
+                }
+            }
+            Object.freeze(o);
+            return o;
+        };`;
+    deepFreezeScript.id = "deepFreezeScript";
+    document.querySelector('body').appendChild(deepFreezeScript);
+
+    var pageURL = document.location.href;
+    if (pageURL.includes(".app.netsuite.com")) {
+        var instanceId = pageURL.split(".app.")[0].split("://")[1];
+
+        chrome.storage.local.get("allInstancesData", function (items) {
+            //console.log("Got from memory : " + JSON.stringify(items));
+            if (jQuery.isEmptyObject(items))
+                saveThisInstanceData(items, instanceId);
+            else {
+                if (!items.allInstancesData.hasOwnProperty(instanceId))
+                    saveThisInstanceData(items.allInstancesData, instanceId);
+                else
+                    // console.log("This account data already exists");
+                ;
+            }
+            var allInstancesDataToDump = JSON.stringify(items.allInstancesData);
+            var instanceDataDumpScript = document.createElement("script");
+            instanceDataDumpScript.innerHTML = `
+                const multiInstanceDataObject = {};
+                window['tempAllInstancesData'] = JSON.parse('${allInstancesDataToDump}');  
+                deepFreeze(tempAllInstancesData);
+                  const allInstancesData=tempAllInstancesData;`;
+            document.querySelector('body').appendChild(instanceDataDumpScript);
+            sendShortcutReadyMessage();
+        });
+    }
+
 }

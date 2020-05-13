@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "NetSuite Links",
-  "version": "3.0.12",
+  "version": "3.1.0",
   "description": "Load N/* Modules , search via Shortcut and More.",
   "permissions": ["tabs", "*://*.app.netsuite.com/*", "storage"],
   "browser_action": {
@@ -9,17 +9,15 @@
     "default_title": "NetSuite Links"
   },
   "background": {
-    "scripts": ["thirdParty/external/jquery/jQuery.js", "myScripts/messagingBackbone.js", "shortcuts/shortcut_handler.js"],
+    "scripts": ["myScripts/messagingBackbone.js", "shortcuts/shortcut_handler.js"],
     "persistent": true
   },
   "content_scripts": [{
-    "matches": [
-      "*://*.app.netsuite.com/*"
-    ],
+    "matches": ["*://*.app.netsuite.com/*"],
     "run_at": "document_start",
-    "exclude_globs":["*://*.app.netsuite.com/*reportrunner.nl*"],
-    "js": ["thirdParty/external/jquery/jQuery.js", "thirdParty/jquery-ui.min.js", "myScripts/contentScrptMultiInstance.js"],
-    "css": ["thirdParty/jquery-ui.structure.min.css", "thirdParty/jquery-ui.min.css", "thirdParty/jquery-ui.theme.min.css","shortcuts/overlays.css"]
+    "exclude_globs": ["*://*.app.netsuite.com/*reportrunner.nl*"],
+    "js": ["thirdParty/jquery.js", "myScripts/contentScrptMultiInstance.js"],
+    "css": ["shortcuts/overlays.css"]
   }],
   "icons": {
     "16": "icons/NewIconStar16.png",

@@ -30,6 +30,8 @@ function setupOverlay() {
             var displayLabel = compNInst + instType + " | " + instUsrName;
             var labelValue = instURL;
 
+            displayLabel = displayLabel.replace(/\\s+/g, " ");
+
             multiInstanceDataObject.availableInstancesArr.push({
                 label: displayLabel
             });
@@ -37,8 +39,11 @@ function setupOverlay() {
         }
         deepFreeze(multiInstanceDataObject);
 
-        jQuery("<div id='multiInstanceOverlayVTS' class='moduleInputGroup shortcutOverlayMain'><input id='multiInstanceOverlayVTSInput' placeholder='Select Instance' class='moduleInputText shortcutOverlayInputBox' spellcheck='false'></div>").appendTo("body");
+        jQuery("<div id='multiInstanceOverlayVTS' class='moduleInputGroup shortcutOverlayMain'><div class='inputBoxWrapper'><input id='multiInstanceOverlayVTSInput' placeholder='Load Parallel Instance!' class='moduleInputText shortcutOverlayInputBox' spellcheck='false'> <div id='autocomplete_result_instance' class='autocomplete_result' style='display: none;'></div></div></div>").appendTo("body");
 
+
+/* 
+        <div id='multiInstanceOverlayVTS' class='moduleInputGroup shortcutOverlayMain'><input id='multiInstanceOverlayVTSInput' placeholder='Select Instance' class='moduleInputText shortcutOverlayInputBox' spellcheck='false'></div> */
 
         jQuery("#multiInstanceOverlayVTS").click(function (e) {
             //console.log("Outside Input box clicked");
@@ -67,14 +72,17 @@ function init_multiInstanceShrtct() {
 
     setupOverlay();
 
-    multiInstanceOverlayVTSOn();
-
-
     setTimeout(function () {
-        jQuery("#multiInstanceOverlayVTSInput").autocomplete({
-            source: multiInstanceDataObject.availableInstancesArr,
-            minLength: 0
-        });
+        var allInstObj = multiInstanceDataObject.availableInstancesArr;
+        var allInstNameArr = [];
+        for(var i=0;i<allInstObj.length;i++){
+            allInstNameArr.push(multiInstanceDataObject.availableInstancesArr[i].label);
+        }
+        var input = document.getElementById("multiInstanceOverlayVTSInput");
+        var displaySuggestion = document.getElementById("autocomplete_result_instance");
+        myAutocomplete(input, displaySuggestion,allInstNameArr );
+
+        multiInstanceOverlayVTSOn();
 
     }, 500);
 

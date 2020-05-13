@@ -61,6 +61,38 @@ a.ui-button:active,
   cursor: pointer;
 }
 
+
+.autocomplete_result div {
+  padding: 4px;
+  margin: 0;
+  color: var(--text);
+}
+
+
+.autocomplete_result div:hover {
+  color: var(--accent);
+}
+
+.autocomplete_result {
+  box-sizing: border-box;
+  display: none;
+  position: absolute;
+  top: 73%;
+  left: 50%;
+  width: 70%;
+  color: var(--text);
+  transform: translate(-50%, -50%);
+  background-color: var(--bg-light);
+  font-size: 1.75em;
+  cursor: text;
+  caret-color: var(--accent);
+  border: 0px;
+  padding: 15px;
+  height: 40%;
+  overflow: auto;
+}
+
+
 :root {
   --bg: #232931;
   --bg-light: #333941;
@@ -68,5 +100,20 @@ a.ui-button:active,
   --text: #f1f1f1;
   --glow: inset 0 0 15px var(--accent);
   --glow-dark: inset 0 0 15px var(--bg);
-  --glow-mine:0 0 100px 60px var(--bg);
+  --glow-mine: 0 0 100px 60px var(--bg);
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: var(--bg-light);
 }
