@@ -15,7 +15,6 @@
   "content_scripts": [{
     "matches": ["*://*.app.netsuite.com/*"],
     "run_at": "document_start",
-    "exclude_globs": ["*://*.app.netsuite.com/*reportrunner.nl*"],
     "js": ["thirdParty/jquery.js", "myScripts/contentScrptMultiInstance.js"],
     "css": ["shortcuts/overlays.css"]
   }],

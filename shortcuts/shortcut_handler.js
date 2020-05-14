@@ -22,11 +22,11 @@ chrome.commands.onCommand.addListener(function (command) {
                 var tabUrl = currTab.url;
                 if (tabUrl.includes("app.netsuite.com")) {
 
-                    if (tabUrl.includes("reportrunner.nl") || tabUrl.includes("scriptlet.nl")) {
+                    /*  if (tabUrl.includes("reportrunner.nl") || tabUrl.includes("scriptlet.nl")) {
 
-                        alert("Does't Work on This Page, Please Use Extension!");
-                        return;
-                    }
+                         alert("Does't Work on This Page, Please Use Extension!");
+                         return;
+                     } */
 
                     if (!areShortcutsReady) {
                         return alert("Please wait for page to load completely before using shortcuts!");

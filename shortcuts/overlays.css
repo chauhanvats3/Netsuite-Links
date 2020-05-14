@@ -73,6 +73,10 @@ a.ui-button:active,
   color: var(--accent);
 }
 
+.autocomplete_result div.focused_autocomplete_div {
+  color: var(--accent);
+}
+
 .autocomplete_result {
   box-sizing: border-box;
   display: none;
