@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var moduleInputGroup = document.getElementById("loadModules");
     var btnRecToJson = document.getElementById("btnRecToJson");
     var helpTextSpan = document.getElementById("helpText");
+    var autoCompleteResults = document.getElementById("autocomplete_result_module");
 
     var inputBoxValue = "";
     var whichInputBox = "";
@@ -48,15 +49,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 "N/util",
                 "N/xml"
             ];
-            $("#moduleNameInput").autocomplete({
-                source: availableModules,
-                minLength: 1,
-                position: {
-                    "my": "bottom",
-                    "at": "top",
-                    "of": $("#moduleNameInput")
-                }
-            });
+
+            myAutocomplete(inputModuleName, autoCompleteResults, availableModules);
         });
     }
 
@@ -93,7 +87,8 @@ document.addEventListener('DOMContentLoaded', function () {
                             moduleInputGroup.classList.add("moduleInputGroupOpened");
                         else {
                             moduleInputGroup.classList.remove("moduleInputGroupOpened");
-                            $("#moduleNameInput").autocomplete("close");
+                            autoCompleteResults.style.visibility = "hidden";
+                            // $("#moduleNameInput").autocomplete("close");
                         }
                         break;
                 }
@@ -113,18 +108,21 @@ document.addEventListener('DOMContentLoaded', function () {
                     helpText = "Search On SuiteAnwers directly from here.\n| Shortcut > Ctrl + Shift + s|";
                     moduleInputGroup.style.zIndex = 0;
                     inputModuleName.value = "";
-                    if (inputSearch.value === "")
+                    if (inputSearch.value === "") {
                         inputBoxValue = "";
+                    }
                 }
                 if (whichInputGroup == moduleInputGroup.id) {
                     helpText = "Load client-side modules to be used in the console of browser.\n| Shortcut > Ctrl + m |";
                     searchInputGroup.style.zIndex = 0;
                     inputSearch.value = "";
-                    if (inputModuleName.value === "")
+                    if (inputModuleName.value === "") {
                         inputBoxValue = "";
+                    }
                 }
                 helpTextSpan.innerText = helpText;
-                helpTextSpan.style.visibility = 'visible';
+                if (inputModuleName.value == "")
+                    helpTextSpan.style.visibility = 'visible';
 
                 // console.log("Enter which box : " + whichInputGroup);
                 //console.log("Value : " + inputBoxValue);
@@ -186,6 +184,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         moduleInputGroup.classList.add("moduleInputGroupOpened");
                         searchInputGroup.style.zIndex = 0;
                         moduleInputGroup.style.zIndex = 1;
+                        autoCompleteResults.style.visibility = "visible";
                         break;
                 }
 
@@ -196,7 +195,9 @@ document.addEventListener('DOMContentLoaded', function () {
                         break;
                     case "loadModules":
                         moduleInputGroup.classList.remove("moduleInputGroupOpened");
-                        $("#moduleNameInput").autocomplete("close");
+                        if (!(moduleInputGroup.matches(':hover')))
+                            autoCompleteResults.style.visibility = "hidden";
+                        //   $("#moduleNameInput").autocomplete("close");
                         break;
                 }
             }
@@ -363,10 +364,13 @@ document.addEventListener('DOMContentLoaded', function () {
     inputModuleName.addEventListener('keydown', (e) => {
         // console.log("e.key" + e.key);
         if (e.key === "Enter") {
+            inputModuleName.value = autoCompleteResults.children.item(count).innerText;
             loadModule();
         } else if (e.key === "Tab") {
             //console.log("tab pressed");
             e.preventDefault();
+        } else if (inputModuleName.value != "") {
+            helpTextSpan.style.visibility = 'hidden';
         }
     });
     if (!moduleLoadDisabled) {

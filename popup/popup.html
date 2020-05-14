@@ -7,10 +7,8 @@
     integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
   <link rel="stylesheet" href="popup.css">
   <script type="text/javascript" src="../thirdParty/jquery.js"></script>
-  <link rel="stylesheet" href="../thirdParty/jquery-ui.min.css">
-  <script type="text/javascript" src="../thirdParty/jquery-ui.min.js"></script>
-  <link rel="stylesheet" href="../thirdParty/jquery-ui.structure.min.css">
-  <link rel="stylesheet" href="../thirdParty/jquery-ui.theme.min.css">
+  <link rel="stylesheet" href="myAutoComplete.css">
+  <script src="myAutoComplete.js"></script>
   <script src="popup.js"></script>
 </head>
 
@@ -18,6 +16,7 @@
   <div class="scroll-wrapper">
     <div id="primary">
       <div class="buttons">
+        <div id='autocomplete_result_module' class='autocomplete_result' style='display: none;'></div>
         <button class="button hasNoValue" id="btnMultiInstances" value=""
           title="LogIn to multiple instances without logging out of any other. You must first logIn to an instance for it to appear in the menu | Shortcut > Ctrl + i |">
           Multi Instances
@@ -44,6 +43,7 @@
         <div id="loadModules" class="moduleInputGroup" autocomplete="off">
           <input id="moduleNameInput" class="inputText" placeholder="Disabled Here">
           <i id="btnLoadModule" class="fa fa-terminal"></i>
+
         </div>
 
 

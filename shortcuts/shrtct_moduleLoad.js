@@ -56,7 +56,7 @@ function setupOverlay() {
         });
 
         inputModuleName = document.getElementById("moduleLoadOverlayVTSInput");
-        inputModuleName.addEventListener('keydown', (e) => {
+        inputModuleName.addEventListener('keyup', (e) => {
             //console.log("e.key" + e.key);
             if (e.key === "Enter") {
                 loadModule();

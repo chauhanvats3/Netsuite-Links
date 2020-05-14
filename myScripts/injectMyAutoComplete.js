@@ -32,7 +32,6 @@ function myAutocomplete(autocomplete, autocomplete_result, data) {
 
   function nlHandleKeys(e) {
     var keyPressed = e.key;
-
     if (autocomplete_result.childElementCount == 0)
       return;
     switch (keyPressed) {
@@ -43,16 +42,13 @@ function myAutocomplete(autocomplete, autocomplete_result, data) {
           autocomplete.focus();
         }
         break;
-      case 'Enter':
+      case 'Enter':       
+       e.preventDefault();
         console.log("is cancel : "+e.cancelable);
-        e.preventDefault();
         if (count > -1 && count < autocomplete_result.childElementCount){
           autocomplete.value = autocomplete_result.children.item(count).innerText;
           autocomplete.focus();
-          var e = jQuery.Event("keypress");
-          e.which = 13; //choose the one you want
-          e.keyCode = 13;
-          jQuery(autocomplete).trigger(e);
+          //loadModule();
         }
         break;
       case 'ArrowLeft':
