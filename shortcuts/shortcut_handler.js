@@ -22,7 +22,7 @@ chrome.commands.onCommand.addListener(function (command) {
                 var tabUrl = currTab.url;
                 if (tabUrl.includes("app.netsuite.com")) {
 
-                    if (tabUrl.includes("reportrunner.nl") || tabUrl.includes("workflowdesktop.nl")) {
+                    if (tabUrl.includes("workflowdesktop.nl")) {
 
                         alert("Does't Work on This Page, Please Use Extension!");
                         return;

@@ -235,8 +235,8 @@ document.addEventListener('DOMContentLoaded', function () {
                         //console.log("Current tabis present");
                         var currTab = currentWindowTabs[0];
                         var tabUrl = currTab.url;
-                        if (tabUrl.includes("app.netsuite.com")) {
-                            //console.log("tab includes ns url");
+                        if (tabUrl.includes("app.netsuite.com") && !(tabUrl.includes("workflowdesktop.nl"))) {
+                            //console.log("tab includes ns url"); 
                             inputModuleName.style.display = "block";
                             inputModuleName.placeholder = "LoadModule > Ctrl + M";
                         } else {
@@ -364,7 +364,11 @@ document.addEventListener('DOMContentLoaded', function () {
     inputModuleName.addEventListener('keydown', (e) => {
         // console.log("e.key" + e.key);
         if (e.key === "Enter") {
-            inputModuleName.value = autoCompleteResults.children.item(count).innerText;
+            try {
+                inputModuleName.value = autoCompleteResults.children.item(count).innerText;
+            } catch (exc) {
+                inputModuleName.value = autoCompleteResults.firstChild.innerText;
+            }
             loadModule();
         } else if (e.key === "Tab") {
             //console.log("tab pressed");
