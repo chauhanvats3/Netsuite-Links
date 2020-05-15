@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "NetSuite Links",
-  "version": "3.2.0",
+  "version": "3.2.1",
   "description": "Load N/* Modules , search via Shortcut and More.",
   "permissions": ["tabs", "*://*.app.netsuite.com/*", "storage"],
   "browser_action": {
@@ -15,6 +15,7 @@
   "content_scripts": [{
     "matches": ["*://*.app.netsuite.com/*"],
     "run_at": "document_start",
+    "exclude_globs": ["*workflowdesktop.nl*"],
     "js": ["thirdParty/jquery.js", "myScripts/contentScrptMultiInstance.js"],
     "css": ["shortcuts/overlays.css"]
   }],
