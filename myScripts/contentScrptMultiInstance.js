@@ -19,8 +19,8 @@ function sendShortcutReadyMessage() {
 
 
 function saveThisInstanceData(allInstancesData, instanceIdFull) {
-    var companyNinstance = jQuery(".ns-role-company")[0].innerHTML;
-    var instUsrName = jQuery(".ns-role > span")[0].innerHTML;
+    var companyNinstance = document.getElementsByClassName('ns-role')[0].children[1].children[0].innerHTML;
+    var instUsrName = document.getElementsByClassName('ns-role')[0].children[0].innerHTML;
     var instURL = "https://" + instanceIdFull + ".app.netsuite.com/app/center/card.nl";
 
     var instType = instanceIdFull.split("-");
@@ -67,7 +67,9 @@ function pageFullyLoaded() {
 
         chrome.storage.local.get("allInstancesData", function (items) {
             //console.log("Got from memory : " + JSON.stringify(items));
-            if (jQuery.isEmptyObject(items))
+            var dataGotIsEmpty = Object.keys(items).length === 0 && items.constructor === Object;
+            console.log(dataGotIsEmpty);
+            if (dataGotIsEmpty)
                 saveThisInstanceData(items, instanceId);
             else {
                 if (!items.allInstancesData.hasOwnProperty(instanceId))
@@ -83,10 +85,17 @@ function pageFullyLoaded() {
                 'multiInstanceOverlayVTSInput': true,
                 'moduleLoadOverlayVTSInput': true
             };
+            
                 const multiInstanceDataObject = {};
-                window['tempAllInstancesData'] = JSON.parse('${allInstancesDataToDump}');  
-                deepFreeze(tempAllInstancesData);
-                  const allInstancesData=tempAllInstancesData;`;
+                if(!${dataGotIsEmpty})
+                    window['tempAllInstancesData'] = JSON.parse('${allInstancesDataToDump}');  
+                else    
+                    window['tempAllInstancesData'] = {};  
+
+                    deepFreeze(tempAllInstancesData);
+                    const allInstancesData=tempAllInstancesData;
+                
+                `;
             document.querySelector('body').appendChild(instanceDataDumpScript);
             sendShortcutReadyMessage();
         });

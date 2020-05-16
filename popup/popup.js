@@ -429,7 +429,8 @@ document.addEventListener('DOMContentLoaded', function () {
         console.log("setupOtherInstanceBtns");
         chrome.storage.local.get("allInstancesData", function (items) {
             // console.log("Got from memory : " + JSON.stringify(items));
-            if (jQuery.isEmptyObject(items))
+            var dataGotIsEmpty = Object.keys(items).length === 0 && items.constructor === Object;
+            if (dataGotIsEmpty)
                 // console.log("Data enmpty");
             ;
             else {

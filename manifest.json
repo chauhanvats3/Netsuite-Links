@@ -16,7 +16,7 @@
     "matches": ["*://*.app.netsuite.com/*"],
     "run_at": "document_start",
     "exclude_globs": ["*workflowdesktop.nl*"],
-    "js": ["thirdParty/jquery.js", "myScripts/contentScrptMultiInstance.js"],
+    "js": ["myScripts/contentScrptMultiInstance.js"],
     "css": ["shortcuts/overlays.css"]
   }],
   "icons": {
@@ -25,7 +25,7 @@
     "48": "icons/NewIconStar48.png",
     "128": "icons/NewIconStar128.png"
   },
-  "content_security_policy": "script-src 'self' https://www.gstatic.com/; object-src 'self'",
+  "content_security_policy": "script-src 'self' https://code.jquery.com; object-src 'self'",
   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAoGi8+m3TKvNDUgTOJMOwclfJZ2CzkGAyle6w8fzBMv05+tMcjuXsktYTKwFdHmHK39fXJvxHerctWwS0UCzrIi20KHqg+tEDlLg0qemwoQPBRZ8Ybo4JTbAZfjs1jysQa8m/FkJtmlNN6rY5NWaI7u2vCYRvEL6mWBTWPHAplxyoH9aHIVIq5139mLgITxjJPzMqlqng5pCg1aQJKVmLTRdeIC5L4kbyTNsrCYS0PtlfjsbcN5ZKLVbzpkVBfhK3cSOan4WV417xl5+YMzOqCsOTEsivPt5LfFW9QFxpnK206f7CLNrnk3EzsgSyUHm1kuKhiFzKc9Geu3WVMNWqAwIDAQAB",
   "commands": {
     "load-module-shrtct": {

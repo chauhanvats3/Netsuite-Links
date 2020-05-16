@@ -92,7 +92,7 @@ function highlightCurrentSuggestion(){
 
   function showSuggestions(event) {
     var curInputValue = autocomplete.value.trim();
-    console.log(autocomplete.id);
+    //console.log(autocomplete.id);
 
     //console.log(curInputValue + " $ " + lastInputValue);
     if (curInputValue == lastInputValue && !justLoadedPage[autocomplete.id])
