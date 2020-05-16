@@ -79,6 +79,10 @@ function pageFullyLoaded() {
             var allInstancesDataToDump = JSON.stringify(items.allInstancesData);
             var instanceDataDumpScript = document.createElement("script");
             instanceDataDumpScript.innerHTML = `
+            var justLoadedPage = {
+                'multiInstanceOverlayVTSInput': true,
+                'moduleLoadOverlayVTSInput': true
+            };
                 const multiInstanceDataObject = {};
                 window['tempAllInstancesData'] = JSON.parse('${allInstancesDataToDump}');  
                 deepFreeze(tempAllInstancesData);

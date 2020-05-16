@@ -44,7 +44,7 @@ function myAutocomplete(autocomplete, autocomplete_result, data) {
         break;
       case 'Enter':       
        e.preventDefault();
-        console.log("is cancel : "+e.cancelable);
+        //console.log("is cancel : "+e.cancelable);
         if (count > -1 && count < autocomplete_result.childElementCount){
           autocomplete.value = autocomplete_result.children.item(count).innerText;
           autocomplete.focus();
@@ -79,7 +79,7 @@ function myAutocomplete(autocomplete, autocomplete_result, data) {
         break;
      
     }
-    console.log("Pressed times : " + count);
+    //console.log("Pressed times : " + count);
   }
 
 function highlightCurrentSuggestion(){
@@ -92,16 +92,16 @@ function highlightCurrentSuggestion(){
 
   function showSuggestions(event) {
     var curInputValue = autocomplete.value.trim();
-    
+    console.log(autocomplete.id);
 
-    console.log(curInputValue + " $ " + lastInputValue);
-    if (curInputValue == lastInputValue)
+    //console.log(curInputValue + " $ " + lastInputValue);
+    if (curInputValue == lastInputValue && !justLoadedPage[autocomplete.id])
       return;
 
     var acRegEx = new RegExp("^.*" + autocomplete.value.trim() + ".*$", "i");
     for (var x = 0, b = document.createDocumentFragment(), c = false; x < data.length; x++) {
       if (acRegEx.test(data[x]) || curInputValue == "") {
-        console.log("ran");
+        //console.log("ran");
         c = true;
         var d = document.createElement("div");
         d.innerText = data[x];
@@ -111,6 +111,7 @@ function highlightCurrentSuggestion(){
     }
     lastInputValue = autocomplete.value;
     count = -1;
+    justLoadedPage[autocomplete.id] = false;
     if (c == true) {
       autocomplete_result.innerHTML = "";
       autocomplete_result.style.display = "block";

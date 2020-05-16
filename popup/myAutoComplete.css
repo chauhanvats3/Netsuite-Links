@@ -26,12 +26,11 @@
     cursor: text;
     caret-color: var(--accent);
     border: 0px;
-    padding: 15px;
     height: 40%;
     overflow: auto;
     height: 50%;
     top: 29%;
-    width: 80%;
+    width: 85%;
     z-index: 999;
     text-align: center;
     border-radius: 6px;
