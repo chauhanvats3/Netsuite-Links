@@ -49,9 +49,11 @@ body {
   justify-content: space-between;
   align-items: center;
 }
-#returnToPrimary{
+
+#returnToPrimary {
   color: var(--accent);
 }
+
 #shrtctLabel {
   color: var(--text);
   padding: 10px 20px;
@@ -128,12 +130,15 @@ body {
   border-radius: 25px;
   cursor: pointer;
   margin: auto;
+  background-color: aliceblue;
 }
 
 .moduleInputGroup:hover,
 .searchInputGroup:hover {
   box-shadow: 0 0 10px var(--accent);
   width: 200%;
+  z-index: 1;
+  background-color: aliceblue;
 }
 
 .searchInputGroup:hover {
@@ -167,20 +172,22 @@ body {
   text-align: center;
   padding: 5px 0;
   border-radius: 6px;
- 
+
   /* Position the tooltip text - see examples below! */
   position: absolute;
   z-index: 1;
   bottom: 45%;
   left: 50%;
-  margin-left: -100px; /* Use half of the width (120/2 = 60), to center the tooltip */
+  margin-left: -100px;
+  /* Use half of the width (120/2 = 60), to center the tooltip */
 
 }
 
 .helpText::after {
   content: " ";
   position: absolute;
-  top: 100%; /* At the bottom of the tooltip */
+  top: 100%;
+  /* At the bottom of the tooltip */
   left: 50%;
   margin-left: -5px;
   border-width: 5px;

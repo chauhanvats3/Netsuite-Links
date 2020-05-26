@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
 
-    var finalLink = {};
     var inputSearch = document.getElementById("inputSearch");
     var btnSearch = document.getElementById("btnSearch");
     var inputModuleName = document.getElementById("moduleNameInput");
@@ -12,8 +11,8 @@ document.addEventListener('DOMContentLoaded', function () {
     var helpTextSpan = document.getElementById("helpText");
     var autoCompleteResults = document.getElementById("autocomplete_result_module");
 
+    var finalLink = {};
     var inputBoxValue = "";
-    var whichInputBox = "";
     var whichInputGroup = "";
     var defaultAccName = 'tstdrv1155888';
     var moduleLoadDisabled = false;
@@ -25,33 +24,33 @@ document.addEventListener('DOMContentLoaded', function () {
     setupOtherInstanceBtns();
 
     function setAutocomplete() {
-        $(function () {
-            var availableModules = [
-                "N/record",
-                "N/currentRecord",
-                "N/runtime",
-                "N/action",
-                "N/currency",
-                "N/email",
-                "N/format",
-                "N/format/i18n",
-                "N/http",
-                "N/https",
-                "N/log",
-                "N/portlet",
-                "N/query",
-                "N/search",
-                "N/transaction",
-                "N/translation",
-                "N/ui/dialog",
-                "N/ui/message",
-                "N/url",
-                "N/util",
-                "N/xml"
-            ];
 
-            myAutocomplete(inputModuleName, autoCompleteResults, availableModules);
-        });
+        var availableModules = [
+            "N/record",
+            "N/currentRecord",
+            "N/runtime",
+            "N/action",
+            "N/currency",
+            "N/email",
+            "N/format",
+            "N/format/i18n",
+            "N/http",
+            "N/https",
+            "N/log",
+            "N/portlet",
+            "N/query",
+            "N/search",
+            "N/transaction",
+            "N/translation",
+            "N/ui/dialog",
+            "N/ui/message",
+            "N/url",
+            "N/util",
+            "N/xml"
+        ];
+
+        myAutocomplete(inputModuleName, autoCompleteResults, availableModules);
+
     }
 
 
@@ -88,7 +87,6 @@ document.addEventListener('DOMContentLoaded', function () {
                         else {
                             moduleInputGroup.classList.remove("moduleInputGroupOpened");
                             autoCompleteResults.style.visibility = "hidden";
-                            // $("#moduleNameInput").autocomplete("close");
                         }
                         break;
                 }
@@ -123,9 +121,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 helpTextSpan.innerText = helpText;
                 if (inputModuleName.value == "")
                     helpTextSpan.style.visibility = 'visible';
-
-                // console.log("Enter which box : " + whichInputGroup);
-                //console.log("Value : " + inputBoxValue);
             });
         });
         /**================================== Animation Fix ENDS =============================================== */
@@ -170,7 +165,6 @@ document.addEventListener('DOMContentLoaded', function () {
             var caller = e.target || e.srcElement;
             inputBoxValue = caller.value;
             //console.log("inpBxVal : "+inputBoxValue);
-            whichInputBox = caller.id;
 
             if (inputBoxValue) {
                 //console.log("Caller Has Value");
@@ -197,7 +191,6 @@ document.addEventListener('DOMContentLoaded', function () {
                         moduleInputGroup.classList.remove("moduleInputGroupOpened");
                         if (!(moduleInputGroup.matches(':hover')))
                             autoCompleteResults.style.visibility = "hidden";
-                        //   $("#moduleNameInput").autocomplete("close");
                         break;
                 }
             }
@@ -445,8 +438,13 @@ document.addEventListener('DOMContentLoaded', function () {
                     //console.log("Data Read : " + JSON.stringify(eachInstData));
                     if (instType !== "" || instType !== undefined || instType !== null)
                         instType = " | " + instType.toUpperCase();
-                    var eachBtnStr = `<button id="btn${instanceId}" class="hasFullValue instanceLink" value="${instURL}">${compNInst}${instType} </br> ${instUsrName}</button>`;
-                    $("#instancesDiv").append(eachBtnStr);
+                    var eachBtnObj = document.createElement("button");
+                    eachBtnObj.id = `btn${instanceId}`;
+                    eachBtnObj.classList.add(`instanceLink`);
+                    eachBtnObj.classList.add(`hasFullValue`);
+                    eachBtnObj.value = `${instURL}`;
+                    eachBtnObj.innerHTML = `${compNInst}${instType} </br> ${instUsrName}`;
+                    document.getElementById("instancesDiv").appendChild(eachBtnObj);
                     defaultAccName = instanceId;
                 }
             }
@@ -457,17 +455,17 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function multiInstClick() {
-        $("#primary")[0].style.transform = "translateX(100vw)";
-        $("#primary")[0].style.opacity = 0;
-        $("#secondary")[0].style.transform = "translateX(100vw)";
-        $("#secondary")[0].style.opacity = 1;
+        document.getElementById("primary").style.transform = "translateX(100vw)";
+        document.getElementById("primary").style.opacity = 0;
+        document.getElementById("secondary").style.transform = "translateX(100vw)";
+        document.getElementById("secondary").style.opacity = 1;
     }
 
     function secondaryBackClick() {
-        $("#secondary")[0].style.transform = "";
-        $("#secondary")[0].style.opacity = "";
-        $("#primary")[0].style.transform = "";
-        $("#primary")[0].style.opacity = "";
+        document.getElementById("primary").style.transform = "";
+        document.getElementById("primary").style.opacity = "";
+        document.getElementById("secondary").style.transform = "";
+        document.getElementById("secondary").style.opacity = "";
     }
     /*=====================Multi Instance Loader Ends=============== */
 
