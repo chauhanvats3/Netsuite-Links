@@ -7,3 +7,4 @@
 - Provides suggestions for standard modules while using Module Load feature.
 - Would also load any AMD module in current instance's File Cabinet using "*SuiteScripts/{module path}.js*"
 ---
+[Get It From Chrome Web Store](https://chrome.google.com/webstore/detail/netsuite-links/igafblhljepfhmcccgklehhlbheclmob)
