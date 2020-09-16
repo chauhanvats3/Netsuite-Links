@@ -1,3 +1,6 @@
+> No Longer In Development By Me. Feel free to contribute if you want,
+> I'll publish to chrome web store
+
 # Features :
 -  Load Client-Side modules in a page to be used in console **(Shortcut -> Ctrl + m)**
 - LogIn to multiple instances at the same time without closing other instance. **(Shortcut -> Ctrl + i)**
